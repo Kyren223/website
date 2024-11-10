@@ -1,12 +1,18 @@
-import { defineConfig } from 'astro/config';
+import { defineConfig } from "astro/config";
 
-import mdx from '@astrojs/mdx';
+import mdx from "@astrojs/mdx";
 
-import tailwind from '@astrojs/tailwind';
-
-import starlight from '@astrojs/starlight';
+import starlight from "@astrojs/starlight";
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [mdx(), tailwind(), starlight()]
+  integrations: [
+    starlight({
+      title: "My delightful docs site",
+      customCss: [
+        './src/styles/custom.css',
+      ],
+    }),
+    mdx(),
+  ],
 });
