@@ -1,0 +1,13 @@
+---
+import Prose from '../components/Prose.astro';
+import MarkdownLayout from '../layouts/MarkdownLayout.astro';
+import { getEntry } from 'astro:content';
+
+const entry = await getEntry('blogs', 'blog-1');
+const { Content } = await entry.render();
+---
+<MarkdownLayout title='HMMMMM'>
+  <Prose>
+    <Content />
+  </Prose>
+</MarkdownLayout>
