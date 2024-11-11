@@ -20,31 +20,85 @@ const { title } = Astro.props;
 		<slot />
 	</body>
 </html>
+
 <style is:global>
-	:root {
-		--accent: 136, 58, 234;
-		--accent-light: 224, 204, 250;
-		--accent-dark: 49, 10, 101;
-		--accent-gradient: linear-gradient(
-			45deg,
-			rgb(var(--accent)),
-			rgb(var(--accent-light)) 30%,
-			white 60%
-		);
-	}
-	html {
-		font-family: system-ui, sans-serif;
-		background: #13151a;
-	}
-	code {
-		font-family:
-			Menlo,
-			Monaco,
-			Lucida Console,
-			Liberation Mono,
-			DejaVu Sans Mono,
-			Bitstream Vera Sans Mono,
-			Courier New,
-			monospace;
-	}
+@import url("../styles/JetBrainsMono.css");
+
+:root {
+    --primary: #ffbf00;
+    --secondary: #9b7eca;
+    --accent: #7ed4fb;
+    --extra: #8fcc75;
+    --text: #ffffff;
+    --alt: #999999;
+    --background: #000000;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    background-color: var(--background);
+    color: var(--text);
+    font-family: "Jetbrains Mono", monospace;
+    user-select: none;
+}
+
+body {
+    overflow-y: scroll;
+    zoom: 1;
+}
+@media screen and (max-width: 768px) {
+    body {
+        zoom: 0.8;
+    }
+}
+@media screen and (max-width: 480px) {
+    body {
+        zoom: 0.7;
+    }
+}
+
+main {
+    display: grid;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    grid-template-columns: minmax(200px, 1fr);
+    transform: translate(-50%, -50%);
+    border: 1px;
+    border-style: solid;
+    background: var(--background);
+    padding: 1.75rem;
+    width: 55rem;
+    max-width: 75%;
+    /* ! font-weight: 300; */
+}
+
+h1,
+h2,
+h3 {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+a {
+    font-weight: 300;
+}
+a:link,
+a:visited,
+a:active {
+    background-color: transparent;
+    text-decoration: none;
+    color: var(--secondary);
+}
+a:hover {
+    transition-duration: 0.2s;
+    transition-property: color, text-decoration;
+    text-decoration: underline;
+    color: var(--accent);
+}
+
 </style>

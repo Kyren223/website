@@ -1,7 +1,10 @@
 :root {
   width: 70%;
   margin: auto;
+  /* --sl-text-body-sm: var(--sl-text-sm * 10); */
+  /* --sl-text-code-sm: var(--sl-text-xs * 10); */
+  /* font-size: 130%; */
 }
 p {
-  font-size: 1.625rem;
+  /* font-size: 1.625rem; */
 }

@@ -1,0 +1,50 @@
+---
+interface Props {
+    path: string;
+}
+
+const { path } = Astro.props;
+
+const directories = ["about", "works", "links"]
+
+---
+<nav>
+  <span id="nav-path">/home/kyren/{path}</span>
+  <span id="nav-links">
+    <a href="/">home</a>
+    {directories.map((dir) => (
+    <a href={`/${dir}`}>{dir}</a>
+    <span></span> /* For whitespace */
+    ))}
+  </span>
+</nav>
+
+<style>
+
+nav {
+  font-weight: 300;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  border: 0;
+  border-bottom: 1px;
+  border-style: solid;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+#nav-links a {
+  margin-right: 0.15rem;
+  margin-bottom: 0px;
+  margin-left: 0.15rem;
+  color: var(--primary);
+  font-size: 1rem;
+
+}
+#nav-links a:hover {
+  color: var(--accent);
+}
+#nav-path {
+  margin-right: 2rem;
+}
+
+</style>
