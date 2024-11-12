@@ -2,35 +2,36 @@
 interface Props {
     header: string;
     margin?: string;
+    class?: string;
 }
 
-const { header, margin = "-1px" } = Astro.props;
+const { header, margin = "-1px", class: htmlClass } = Astro.props;
 ---
-<div class="section" style={`margin: ${margin};`}>
+
+<div class="section" style={`margin: ${margin};`} class={htmlClass}>
     <span class="tag">{header}</span>
-    <slot/>
+    <slot />
 </div>
 
 <style>
-.section {
-    position: relative;
-    padding: 0.8rem;
-    padding-top: 0.85rem;
-    display: flex;
-    border-style: solid;
-    border-width: 1px;
-    border-color: var(--alt);
-}
+    .section {
+        position: relative;
+        padding: 0.8rem;
+        padding-top: 0.85rem;
+        display: flex;
+        border-style: solid;
+        border-width: 1px;
+        border-color: var(--alt);
+    }
 
-.tag {
-    position: absolute;
-    top: -0.6rem;
-    left: 0.5rem;
-    background-color: var(--background);
-    padding-right: 0.5rem;
-    padding-left: 0.5rem;
-    font-size: 0.8rem;
-    color: var(--alt);
-}
-
+    .tag {
+        position: absolute;
+        top: -0.6rem;
+        left: 0.5rem;
+        background-color: var(--background);
+        padding-right: 0.5rem;
+        padding-left: 0.5rem;
+        font-size: 0.8rem;
+        color: var(--alt);
+    }
 </style>

@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import TerminalBorder from "../components/TerminalBorder.astro";
+import Link from "../components/Link.astro";
 import Nav from "../components/Nav.astro";
 
 const sshKey = `ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAsrdN6e4XbkJfV/FbH3GY8ujWgxSCSbYiwzQ4rKyren`;
@@ -22,8 +23,7 @@ Hi! I'm Kyren, a software engineer and Minecraft plugin freelancer,
 I love working with Rust, Golang and Java.
 I am also a terminal nerd and linux enthusiast who uses NVIM btw.
 And when I am not coding I am most likely playing video games,
-watching Anime or solving Rubik's cubes fast.
-Test`.trimStart();
+watching Anime or solving Rubik's cubes fast.`.trimStart();
 ---
 
 <Layout title="Kyren's Website">
@@ -52,45 +52,60 @@ Test`.trimStart();
                 <TerminalBorder header="Timezone">
                     <span>UTC+2</span>
                 </TerminalBorder>
-                <TerminalBorder header="SSH Key">
-                    <div
-                        class="w-[100%] flex items-center space-x-2 hover:text-[var(--alt)]"
-                    >
-                        <span
-                            id="sshKey"
-                            class="hover:text-[var(--alt)] cursor-pointer truncate flex-1"
-                            >{sshKey}</span
+                <div class="w-[334%]">
+                    <TerminalBorder header="SSH Key">
+                        <div
+                            class="w-[100%] flex items-center space-x-2 hover:text-[var(--alt)]"
                         >
-                        <button
-                            id="sshKeyCopy"
-                            class="flex items-center justify-center ml-auto hover:text-[var(--alt)]"
-                        >
-                            <svg
-                                width="100%"
-                                height="100%"
-                                viewBox="0 -3 24 24"
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
+                            <span
+                                id="sshKey"
+                                class="hover:text-[var(--alt)] cursor-pointer truncate flex-1"
+                                >{sshKey}</span
                             >
-                                <path
-                                    fill="currentColor"
-                                    fill-rule="evenodd"
-                                    d="M4 2a2 2 0 00-2 2v9a2 2 0 002 2h2v2a2 2 0 002 2h9a2 2 0 002-2V8a2 2 0 00-2-2h-2V4a2 2 0 00-2-2H4zm9 4V4H4v9h2V8a2 2 0 012-2h5zM8 8h9v9H8V8z"
-                                ></path>
-                            </svg>
-                        </button>
-                    </div>
-                </TerminalBorder>
+                            <button
+                                id="sshKeyCopy"
+                                class="flex items-center justify-center ml-auto hover:text-[var(--alt)]"
+                            >
+                                <svg
+                                    width="100%"
+                                    height="100%"
+                                    viewBox="0 -3 24 24"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                >
+                                    <path
+                                        fill="currentColor"
+                                        fill-rule="evenodd"
+                                        d="M4 2a2 2 0 00-2 2v9a2 2 0 002 2h2v2a2 2 0 002 2h9a2 2 0 002-2V8a2 2 0 00-2-2h-2V4a2 2 0 00-2-2H4zm9 4V4H4v9h2V8a2 2 0 012-2h5zM8 8h9v9H8V8z"
+                                    ></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </TerminalBorder>
+                </div>
             </div>
             <div id="right" class="column">
-                <TerminalBorder header="About Me">
+                <TerminalBorder header="Status">
+                    <p>
+                        Working on
+                        <Link href="https://github.com/KapiMC/Kapi">Kapi </Link>
+                        | Learning Web Development | Available for hire
+                    </p>
+                </TerminalBorder>
+                <TerminalBorder header="About Me" margin="20px 0">
                     <p>{aboutMe}</p>
                 </TerminalBorder>
-                <TerminalBorder header="Skills" margin="30px 0px">
-                    <a href="/about/">cd ~/imabanana80/about </a>
-                </TerminalBorder>
-                <TerminalBorder header="Projects">
-                    <a href="/works/">cd ~/imabanana80/works</a>
+                <TerminalBorder header="Links">
+                    <p>
+                        <Link href="https://github.com/Kyren223"
+                            >github.com/Kyren223</Link
+                        >
+                        <br />
+                        <Link
+                            href="https://discord.com/users/481884415090229258"
+                            >discord.com/Kyren223</Link
+                        >
+                    </p>
                 </TerminalBorder>
             </div>
         </div>

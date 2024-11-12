@@ -1,3 +1,7 @@
+---
+title: The search for the perfect ed25519 key pair
+template: splash
+---
 # Other blog
 
 How about code blocks

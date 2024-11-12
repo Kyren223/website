@@ -5,7 +5,7 @@ interface Props {
 
 const { path } = Astro.props;
 
-const directories = ["about", "works", "links"];
+const directories = ["skills", "projects", "blogs"];
 ---
 
 <nav>
@@ -23,10 +23,6 @@ const directories = ["about", "works", "links"];
 </nav>
 
 <style>
-    /* main { */
-    /*     padding-top: 1.25rem; */
-    /* } */
-
     nav {
         font-weight: 300;
         display: flex;
@@ -43,12 +39,13 @@ const directories = ["about", "works", "links"];
         margin-bottom: 0px;
         margin-left: 0.15rem;
         color: var(--primary);
-        font-size: 1rem;
+        font-size: 1.25rem;
     }
     #nav-links a:hover {
         color: var(--accent);
     }
     #nav-path {
         margin-right: 2rem;
+        font-size: 1.25rem;
     }
 </style>
