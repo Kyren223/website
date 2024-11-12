@@ -1,9 +1,9 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import TerminalBorder from '../components/TerminalBorder.astro'
-import Nav from '../components/Nav.astro'
+import Layout from "../layouts/Layout.astro";
+import TerminalBorder from "../components/TerminalBorder.astro";
+import Nav from "../components/Nav.astro";
 
-const sshKey = `ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAsrdN6e4XbkJfV/FbH3GY8ujWgxSCSbYiwzQ4rKyren`
+const sshKey = `ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAsrdN6e4XbkJfV/FbH3GY8ujWgxSCSbYiwzQ4rKyren`;
 const fingerprint = `
 +--[ED25519 256]--+
 |+o.+oE*B%* o     |
@@ -15,7 +15,7 @@ const fingerprint = `
 |. .        .     |
 |..               |
 |.                |
-+----[SHA256]-----+`.trimStart()
++----[SHA256]-----+`.trimStart();
 
 const aboutMe = `
 Hi! I'm Kyren, a software engineer and Minecraft plugin freelancer,
@@ -23,99 +23,156 @@ I love working with Rust, Golang and Java.
 I am also a terminal nerd and linux enthusiast who uses NVIM btw.
 And when I am not coding I am most likely playing video games,
 watching Anime or solving Rubik's cubes fast.
-Test`.trimStart()
+Test`.trimStart();
 ---
+
 <Layout title="Kyren's Website">
-  <main>
-    <Nav path=""/>
-    <div id="content">
-      <div id="left" class="column">
-        <TerminalBorder header='Profile'>
-          <div class="flex items-center space-x-3">
-            <img src="logo.svg" alt="picture" class="h-[100%] object-cover" />
-            <pre id="sshKeyCopy" class="text-[75%] flex-1 ">{fingerprint}</pre>
-          </div>
-        </TerminalBorder>
-        <TerminalBorder header="Name">
-          <span>Kyren</span>
-        </TerminalBorder>
-        <TerminalBorder header="Email">
-          <span>Kyren223@proton.me</span>
-        </TerminalBorder>
-        <TerminalBorder header="Timezone">
-          <span>UTC+2</span>
-        </TerminalBorder>
-        <TerminalBorder header="SSH Key">
-          <div class="w-[100%] flex items-center space-x-2 hover:text-[var(--alt)]">
-            <span id="sshKey" class="hover:text-[var(--alt)] cursor-pointer truncate flex-1">{sshKey}</span>
-            <button id="sshKeyCopy" class="flex items-center justify-center ml-auto hover:text-[var(--alt)]">
-              <svg width="100%" height="100%" viewBox="0 -3 24 24" xmlns="http://www.w3.org/2000/svg" fill="none">
-                <path fill="currentColor" fill-rule="evenodd" d="M4 2a2 2 0 00-2 2v9a2 2 0 002 2h2v2a2 2 0 002 2h9a2 2 0 002-2V8a2 2 0 00-2-2h-2V4a2 2 0 00-2-2H4zm9 4V4H4v9h2V8a2 2 0 012-2h5zM8 8h9v9H8V8z"/>
-              </svg>
-            </button>
-          </div>
-        </TerminalBorder>
-      </div>
-      <div id="right" class="column">
-        <TerminalBorder header="About Me">
-          <p>{aboutMe}</p>
-        </TerminalBorder>
-        <TerminalBorder header="Skills" margin='30px 0px'>
-          <a href="/about/">cd ~/imabanana80/about </a>
-        </TerminalBorder>
-        <TerminalBorder header="Projects">
-          <a href="/works/">cd ~/imabanana80/works</a>
-        </TerminalBorder>
-      </div>
-    </div>
-  </main>
+    <main>
+        <Nav path="" />
+        <div id="content">
+            <div id="left" class="column">
+                <TerminalBorder header="Profile">
+                    <div class="flex items-center space-x-3">
+                        <img
+                            src="logo.svg"
+                            alt="picture"
+                            class="h-[100%] object-cover"
+                        />
+                        <pre
+                            id="sshKeyCopy"
+                            class="text-[75%] flex-1">{fingerprint}</pre>
+                    </div>
+                </TerminalBorder>
+                <TerminalBorder header="Name">
+                    <span>Kyren</span>
+                </TerminalBorder>
+                <TerminalBorder header="Email">
+                    <span>Kyren223@proton.me</span>
+                </TerminalBorder>
+                <TerminalBorder header="Timezone">
+                    <span>UTC+2</span>
+                </TerminalBorder>
+                <TerminalBorder header="SSH Key">
+                    <div
+                        class="w-[100%] flex items-center space-x-2 hover:text-[var(--alt)]"
+                    >
+                        <span
+                            id="sshKey"
+                            class="hover:text-[var(--alt)] cursor-pointer truncate flex-1"
+                            >{sshKey}</span
+                        >
+                        <button
+                            id="sshKeyCopy"
+                            class="flex items-center justify-center ml-auto hover:text-[var(--alt)]"
+                        >
+                            <svg
+                                width="100%"
+                                height="100%"
+                                viewBox="0 -3 24 24"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                            >
+                                <path
+                                    fill="currentColor"
+                                    fill-rule="evenodd"
+                                    d="M4 2a2 2 0 00-2 2v9a2 2 0 002 2h2v2a2 2 0 002 2h9a2 2 0 002-2V8a2 2 0 00-2-2h-2V4a2 2 0 00-2-2H4zm9 4V4H4v9h2V8a2 2 0 012-2h5zM8 8h9v9H8V8z"
+                                ></path>
+                            </svg>
+                        </button>
+                    </div>
+                </TerminalBorder>
+            </div>
+            <div id="right" class="column">
+                <TerminalBorder header="About Me">
+                    <p>{aboutMe}</p>
+                </TerminalBorder>
+                <TerminalBorder header="Skills" margin="30px 0px">
+                    <a href="/about/">cd ~/imabanana80/about </a>
+                </TerminalBorder>
+                <TerminalBorder header="Projects">
+                    <a href="/works/">cd ~/imabanana80/works</a>
+                </TerminalBorder>
+            </div>
+        </div>
+    </main>
 </Layout>
 
 <script>
-  const sshKey = document.getElementById('sshKey').innerHTML
-  function copySshKeyToClipboard() {
-    navigator.clipboard.writeText(sshKey).then(() => {
-      // TODO: show some feedback for copying
-    }).catch(_err => {
-      // TODO: show same feedback but with err
-    });
-  }
+    const sshKey = document.getElementById("sshKey").innerHTML;
+    function copySshKeyToClipboard() {
+        navigator.clipboard
+            .writeText(sshKey)
+            .then(() => {
+                // TODO: show some feedback for copying
+            })
+            .catch((_err) => {
+                // TODO: show same feedback but with err
+            });
+    }
 
-  document.getElementById('sshKey').addEventListener('click', copySshKeyToClipboard);
-  document.getElementById('sshKeyCopy').addEventListener('click', copySshKeyToClipboard);
+    document
+        .getElementById("sshKey")
+        .addEventListener("click", copySshKeyToClipboard);
+    document
+        .getElementById("sshKeyCopy")
+        .addEventListener("click", copySshKeyToClipboard);
 </script>
 
 <style>
-#left {
-  width: 30%;
-}
-#right {
-  width: 67%;
-}
+    #content {
+        margin-top: 0.5rem;
+        display: flex;
+        justify-content: space-between; /* Removing this makes a cool effect of the right side being "attached" to the left */
+    }
 
-#content {
-  margin-top: 0.5rem;
-  display: flex;
-  justify-content: space-between; /* Removing this makes a cool effect of the right side being "attached" to the left */
-}
+    #left {
+        width: 30%;
+    }
+    #right {
+        width: 67%;
+    }
 
-.column {
-  /* border-style: solid; */
-  border-width: 1px;
-  border-color: var(--alt);
-}
+    .column {
+        /* border-style: solid; */
+        border-width: 1px;
+        border-color: var(--alt);
+    }
 
-button {
-  background-color: var(--background);
-  color: var(--text);
-  border: 0;
-  font-size: 1rem;
-  cursor: pointer;
-  width: 20px;
-  height: 20px;
-  padding: 0;
-  line-height: 30px;
-  font-size: 16px;
-}
+    button {
+        background-color: var(--background);
+        color: var(--text);
+        border: 0;
+        font-size: 1rem;
+        cursor: pointer;
+        width: 20px;
+        height: 20px;
+        padding: 0;
+        line-height: 30px;
+        font-size: 16px;
+    }
 
+    nav {
+        font-weight: 300;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        border: 0;
+        border-bottom: 1px;
+        border-style: solid;
+        margin-bottom: 0.75rem;
+        padding-bottom: 0.75rem;
+    }
+    #nav-links a {
+        margin-right: 0.15rem;
+        margin-bottom: 0px;
+        margin-left: 0.15rem;
+        color: var(--primary);
+        font-size: 1rem;
+    }
+    #nav-links a:hover {
+        color: var(--accent);
+    }
+    #nav-path {
+        margin-right: 2rem;
+    }
 </style>
