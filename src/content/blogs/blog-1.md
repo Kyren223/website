@@ -1,3 +1,8 @@
+---
+title: Test
+description: This is a test blog to... well.. test things!
+date: 1970-01-01
+---
 # My Title
 
 ## Secondary

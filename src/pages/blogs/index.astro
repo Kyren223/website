@@ -4,19 +4,29 @@ import TerminalBorder from "../../components/TerminalBorder.astro";
 import BlogItem from "../../components/BlogItem.astro";
 import { getCollection } from "astro:content";
 
-const blogEntries = await getCollection("blogs");
+function formatDate(date) {
+    const day = date.getDate();
+    const month = date.toLocaleString("default", { month: "long" }); // Get full month name
+    const year = date.getFullYear();
 
-const blogs = [
-    {
-        title: "The search for the perfect ed25519 key pair",
-        description: `
-This is the description about this thing which shoud be very
-long and cause this to wrap so that I can see how about 3 lines
-of paragraph will look int this so now I am gonna continue
-yapping to make it even longer`.trimStart(),
-        date: "November 12th 2024",
-    },
-];
+    let suffix = "th";
+    if (day === 1 || day === 21 || day === 31) {
+        suffix = "st";
+    } else if (day === 2 || day === 22) {
+        suffix = "nd";
+    } else if (day === 3 || day === 23) {
+        suffix = "rd";
+    }
+
+    return `${month} ${day}${suffix} ${year}`;
+}
+
+const blogs = (await getCollection("blogs")).map((blog) => ({
+    title: blog.data.title,
+    description: blog.data.description,
+    date: formatDate(blog.data.date),
+    href: "/blogs/" + blog.slug,
+}));
 ---
 
 <Layout dir="blogs/">
@@ -31,6 +41,7 @@ yapping to make it even longer`.trimStart(),
                         title={blog.title}
                         description={blog.description}
                         date={blog.date}
+                        href={blog.href}
                     />
                 </>
             ))

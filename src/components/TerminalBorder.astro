@@ -3,18 +3,12 @@ interface Props {
     header?: string;
     footer?: string;
     margin?: string;
-    class?: string;
 }
 
-const {
-    header = "",
-    footer = "",
-    margin = "-1px",
-    class: htmlClass,
-} = Astro.props;
+const { header = "", footer = "", margin = "-1px" } = Astro.props;
 ---
 
-<div class="section" style={`margin: ${margin};`} class={htmlClass}>
+<div class="section" style={`margin: ${margin};`}>
     <span class="tag-top">{header}</span>
     <span class="tag-bottom">{footer}</span>
     <slot />

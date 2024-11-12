@@ -1,12 +1,12 @@
 ---
 interface Props {
-  href: string;
-  newTab?: boolean;
+    href: string;
+    newTab?: boolean;
 }
 
 const { href, newTab = true } = Astro.props;
 ---
 
 <a href={href} {...newTab && { target: "_blank", rel: "noopener noreferrer" }}>
-  <slot />
+    <slot />
 </a>

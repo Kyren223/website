@@ -1,3 +1,8 @@
+---
+title: The search for the perfect ed25519 key pair
+date: 2024-12-11
+---
+
 # The search for the perfect ed25519 key pair
 
 Todo write intro to catch attention
