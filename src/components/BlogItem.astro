@@ -1,0 +1,22 @@
+---
+import TerminalBorder from "../components/TerminalBorder.astro";
+
+interface Props {
+    title: string;
+    description: string;
+    date: string;
+}
+
+const { title, description, date } = Astro.props;
+---
+
+<TerminalBorder footer={date} margin="0 0 20px">
+    <span>
+        <h1 class="text-[130%] text-[var(--accent)]">
+            {title}
+        </h1>
+        <p class="text-[var(--secondary)]">
+            {description}
+        </p>
+    </span>
+</TerminalBorder>

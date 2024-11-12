@@ -1,0 +1,39 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import TerminalBorder from "../../components/TerminalBorder.astro";
+import BlogItem from "../../components/BlogItem.astro";
+import { getCollection } from "astro:content";
+
+const blogEntries = await getCollection("blogs");
+
+const blogs = [
+    {
+        title: "The search for the perfect ed25519 key pair",
+        description: `
+This is the description about this thing which shoud be very
+long and cause this to wrap so that I can see how about 3 lines
+of paragraph will look int this so now I am gonna continue
+yapping to make it even longer`.trimStart(),
+        date: "November 12th 2024",
+    },
+];
+---
+
+<Layout dir="blogs/">
+    <TerminalBorder header="Shell" margin="0.5rem 0 20px">
+        <p>ls ~/blogs {blogs.length}</p>
+    </TerminalBorder>
+    <div class="max-h-[18.5rem] overflow-y-auto">
+        {
+            blogs.map((blog) => (
+                <>
+                    <BlogItem
+                        title={blog.title}
+                        description={blog.description}
+                        date={blog.date}
+                    />
+                </>
+            ))
+        }
+    </div>
+</Layout>
