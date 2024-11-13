@@ -1,12 +1,12 @@
 ---
-import Layout from "../../layouts/Layout.astro";
-import TerminalBorder from "../../components/TerminalBorder.astro";
-import BlogItem from "../../components/BlogItem.astro";
+import Terminal from "../layouts/Terminal.astro";
+import TerminalBorder from "../components/TerminalBorder.astro";
+import BlogItem from "../components/BlogItem.astro";
 import { getCollection } from "astro:content";
 
-function formatDate(date) {
+function formatDate(date: Date) {
     const day = date.getDate();
-    const month = date.toLocaleString("default", { month: "long" }); // Get full month name
+    const month = date.toLocaleString("default", { month: "long" });
     const year = date.getFullYear();
 
     let suffix = "th";
@@ -21,17 +21,19 @@ function formatDate(date) {
     return `${month} ${day}${suffix} ${year}`;
 }
 
-const blogs = (await getCollection("blogs")).map((blog) => ({
-    title: blog.data.title,
-    description: blog.data.description,
-    date: formatDate(blog.data.date),
-    href: "/blogs/" + blog.slug,
-}));
+const blogs = (await getCollection("blogs"))
+    .sort((a, b) => +new Date(b.data.date) - +new Date(a.data.date))
+    .map((blog) => ({
+        title: blog.data.title,
+        description: blog.data.description,
+        date: formatDate(blog.data.date),
+        href: "/blogs/" + blog.slug,
+    }));
 ---
 
-<Layout dir="blogs/">
+<Terminal path="blogs/">
     <TerminalBorder header="Shell" margin="0.5rem 0 20px">
-        <p>ls ~/blogs {blogs.length}</p>
+        <p>$ ls -lah -t --color=auto ~/blogs</p>
     </TerminalBorder>
     <div class="max-h-[18.5rem] overflow-y-auto">
         {
@@ -39,7 +41,7 @@ const blogs = (await getCollection("blogs")).map((blog) => ({
                 <>
                     <BlogItem
                         title={blog.title}
-                        description={blog.description}
+                        description={blog.description ? blog.description : ""}
                         date={blog.date}
                         href={blog.href}
                     />
@@ -47,4 +49,4 @@ const blogs = (await getCollection("blogs")).map((blog) => ({
             ))
         }
     </div>
-</Layout>
+</Terminal>

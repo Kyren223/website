@@ -1,0 +1,147 @@
+---
+
+// const { data } = Astro.props;
+
+const data = [
+ { name: 'React', total: 9 },
+ { name: 'GraphQL', total: 2 },
+ { name: 'JavaScript', total: 5 },
+ { name: 'SVG', total: 5 },
+ { name: 'TypeScript', total: 7 },
+ { name: 'Tailwind', total: 7 },
+ { name: 'React Query', total: 2 },
+ { name: 'Next.js', total: 3 },
+ { name: 'Hmm', total: 5 },
+]
+
+const chartSize = 400;
+const chartCenter = chartSize / 2;
+
+const colors = ['#58e6d9', '#ff6090', '#4871e3', '#ffc107', '#8bc34a', '#00FF00'];
+const chartData = data.sort((a, b) => b.total - a.total).slice(0, colors.length);
+const pointPadding = 10;
+const max = chartData.reduce((max, current) => (current.total > max ? current.total : max), 0);
+const rings = [...Array(6).keys()];
+
+const getX = (angle, value) => Math.cos(angle - Math.PI / 2) * value;
+const getY = (angle, value) => Math.sin(angle - Math.PI / 2) * value;
+
+const axes = chartData.map((_, index) => {
+  const angle = (Math.PI * 2 * index) / chartData.length;
+  const x = getX(angle, chartSize / 2);
+  const y = getY(angle, chartSize / 2);
+  const points = [
+    [0, 0],
+    [x, y],
+  ]
+    .map((point) => point[0] + ',' + point[1])
+    .join(' ');
+  return {
+    points: points,
+  };
+});
+
+const properties = chartData.map((item, index) => {
+  const { name, total } = item;
+  const clamp = Number(total / (max + pointPadding));
+  const angle = (Math.PI * 2 * index) / chartData.length;
+  const x = getX(angle, (clamp * chartSize) / 2);
+  const y = getY(angle, (clamp * chartSize) / 2);
+  return { name: name, total: total, x: x, y: y };
+});
+
+const shape =
+  properties.reduce((items, item, index) => {
+    const { x, y } = item;
+    const string = `${index === 0 ? 'M' : 'L'}${x},${y}`;
+    return items + string;
+  }, '') + 'z';
+
+const bgColor = "bg-blue-500"
+const borderColor = "border-gray-100"
+const strokeColor = 'stroke-gray-200'
+const shapeClass = 'stroke-gray-900 fill-gray-900/[0.5]'
+---
+
+<div class=`m-0 p-0 ${bgColor} border rounded ${borderColor} shadow-lg`>
+  <div class='grid md:grid-cols-2 items-center gap-16 p-16'>
+    <svg xmlns='http://www.w3.org/2000/svg' viewBox={`0 0 ${chartSize} ${chartSize}`} role='presentation'>
+      <g transform={`translate(${chartCenter},${chartCenter})`}>
+        {
+          rings.map((_, index) => {
+            return (
+              <circle
+                cx={0}
+                cy={0}
+                r={((index / rings.length) * chartSize) / Number((Math.PI / 2 + 0.1).toFixed(2))}
+                    class={strokeColor}
+                fill='none'
+                stroke-width={1}
+              />
+            );
+          })
+        }
+        {
+          axes.map((axis) => {
+            const { points } = axis;
+            return <polyline points={points} class={strokeColor} fill='none' stroke-width={1} />;
+          })
+        }
+                <path d={shape} class=`${shapeClass}` stroke-width={1.5}></path>
+        {
+          properties.map((property, index) => {
+            const { x, y } = property;
+
+            return (
+              <g transform={`translate(${x},${y})`}>
+                <circle cx={0} cy={0} r={8} fill={colors[index]} />
+
+              </g>
+              <g transform={`translate(${x},${y})`}>
+                <text
+                  x={0}
+                  y={0}
+                  fill={colors[index]}
+                  font-size="16px"
+                  text-anchor="middle"   
+                  dominant-baseline="middle"
+                >
+                  Hello
+                </text>
+              </g>
+            );
+          })
+        }
+      </g>
+    </svg>
+    <div>
+      <h2 class='text-4xl font-black uppercase'>Top 6 Tags</h2>
+      <p class='mb-6'>Calculated using Astro Content Collections.</p>
+      <ul class='list-none m-0 p-0'>
+        {
+          properties.map((property, index) => {
+            const { name, total } = property;
+
+            return (
+              <li class='m-0 p-0 flex items-center justify-between border-b border-b-transparent [&:not(:last-child)]:border-b-gray-100 leading-10'>
+                <div class='flex items-center gap-1'>
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    viewBox='0 0 24 24'
+                    width={24}
+                    height={24}
+                    role='presentation'
+                  >
+                    <circle cx={12} cy={12} r={6} fill={colors[index]} />
+                  </svg>
+                  <strong>{name}</strong>
+                </div>
+                <strong>{`x${total}`}</strong>
+              </li>
+            );
+          })
+        }
+      </ul>
+    </div>
+  </div>
+</div>

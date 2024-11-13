@@ -1,5 +1,6 @@
 ---
 import Blog from "../../layouts/Blog.astro";
+import RadarChart from "../../components/RadarChart.astro"
 import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
@@ -15,5 +16,7 @@ const { Content } = await entry.render();
 ---
 
 <Blog title=`/home/kyren/blogs/${entry.slug}`>
+    <h1>Test</h1>
+    <RadarChart></RadarChart>
     <Content />
 </Blog>
