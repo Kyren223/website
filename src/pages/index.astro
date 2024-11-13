@@ -46,11 +46,6 @@ watching Anime or solving Rubik's cubes fast.`.trimStart();
                         class="sshKeyCopy text-[75%] hover:text-[var(--secondary)]">{fingerprint}</pre>
                 </div>
             </TerminalBorder>
-            <TerminalBorder header="GitHub">
-                <Link href="https://github.com/Kyren223">
-                    github.com/Kyren223
-                </Link>
-            </TerminalBorder>
             <TerminalBorder header="Email">
                 <span id="email" class="flex-1">Kyren223@proton.me</span>
                 <button class="emailCopy hover:text-gray-700">
@@ -68,6 +63,16 @@ watching Anime or solving Rubik's cubes fast.`.trimStart();
                         ></path>
                     </svg>
                 </button>
+            </TerminalBorder>
+            <TerminalBorder header="GitHub">
+                <Link href="https://github.com/Kyren223">
+                    github.com/Kyren223
+                </Link>
+            </TerminalBorder>
+            <TerminalBorder header="Discord">
+                <Link href="https://discord.com/users/481884415090229258">
+                    Kyren223
+                </Link>
             </TerminalBorder>
             <TerminalBorder header="Timezone">
                 <div class="flex justify-between w-full">
@@ -112,13 +117,13 @@ watching Anime or solving Rubik's cubes fast.`.trimStart();
                     </Link> | Learning Web Development | Available for hire
                 </p>
             </TerminalBorder>
-            <TerminalBorder header="About Me" margin="20px 0">
+            <TerminalBorder header="About Me" margin="2rem 0">
                 <p>{aboutMe}</p>
             </TerminalBorder>
             <BlogItem
                 header="Latest Blog Post"
                 title={latestBlog.data.title}
-                description={latestBlog.data.description}
+                description={latestBlog.data.description ? latestBlog.data.description : ""}
                 date={latestBlog.data.date}
                 href={"/blogs/" + latestBlog.slug}
             />
