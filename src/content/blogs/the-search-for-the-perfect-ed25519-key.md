@@ -1,13 +1,14 @@
 ---
-title: The search for the perfect ed25519 key pair
+title: The search for the perfect ed25519 key
+description: Here's how you can embed your name in an SSH key
 date: 2024-12-11
 ---
 
-# The search for the perfect ed25519 key pair
+# The search for the perfect ed25519 key
 
 Todo write intro to catch attention
 
-### Why care about ed25519 key pairs?
+### Why care about an ed25519 key?
 
 Ed25519 is a cryptographic algorithm for generating
 a pair of keys, a public one that can be shared with anyone
