@@ -24,12 +24,6 @@ const frameworks = [
     "Bubbletea",
     "Astro",
 ];
-const thing = "▓▓▓▓▓▓▓▓▓▓░░░░░░░░░░";
-const fight = [
-    "FP          ▓▓▓▓▓▓▓▓▓▓░░░░░░░░░░ OOP",
-    "Composition ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░ Inheritance",
-    "Composition ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░ Inheritance",
-];
 ---
 
 <Terminal path="skills">
@@ -40,7 +34,7 @@ const fight = [
                     {langs.map((lang) => <p>{lang}</p>)}
                 </div>
             </TerminalBorder>
-            <TerminalBorder header="Frameworks">
+            <TerminalBorder header="Frameworks" margin="30px 0">
                 <div class="grid md:grid-cols-1 items-center gap-x-8">
                     {frameworks.map((framework) => <p>{framework}</p>)}
                 </div>
@@ -49,15 +43,6 @@ const fight = [
                 <div class="grid md:grid-cols-1 items-center gap-x-8">
                     {tools.map((tool) => <p>{tool}</p>)}
                 </div>
-            </TerminalBorder>
-            <TerminalBorder>
-                <span
-                    >{
-                        fight.map((line) => (
-                            <p class="whitespace-pre-wrap">{line}</p>
-                        ))
-                    }</span
-                >
             </TerminalBorder>
         </div>
         <div class="w-[40%] pl-4">
