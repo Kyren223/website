@@ -39,14 +39,22 @@ watching Anime or solving Rubik's cubes fast.`.trimStart();
                         class="copySshKey text-[75%] flex-1 hover:text-[var(--secondary)]">{fingerprint}</pre>
                 </div>
             </TerminalBorder>
-            <TerminalBorder header="Name">
-                <span>Kyren</span>
+            <TerminalBorder header="GitHub">
+                <Link href="https://github.com/Kyren223">
+                    github.com/Kyren223
+                </Link>
             </TerminalBorder>
             <TerminalBorder header="Email">
                 <span>Kyren223@proton.me</span>
             </TerminalBorder>
             <TerminalBorder header="Timezone">
-                <span>UTC+2</span> </TerminalBorder> <div class="w-[334%]"> <TerminalBorder header="SSH Key">
+                <div class="flex justify-between w-full">
+                    <span class="text-left">UTC+2</span>
+                    <span id="time" class="text-right">Loading...</span>
+                </div>
+            </TerminalBorder>
+            <div class="w-[334%]">
+                <TerminalBorder header="SSH Key">
                     <div class="w-[100%] flex items-center space-x-2 group">
                         <span
                             id="sshKey"
@@ -103,6 +111,19 @@ watching Anime or solving Rubik's cubes fast.`.trimStart();
 </Terminal>
 
 <script>
+    const utcOffset = 2;
+    const time = document.getElementById("time")!;
+    setInterval(() => {
+        console.log("Hit");
+        const now = new Date();
+        const myTime = new Date(now.getTime() + utcOffset * 3600 * 1000);
+        const hours = String(myTime.getUTCHours()).padStart(2, "0");
+        const minutes = String(myTime.getUTCMinutes()).padStart(2, "0");
+        const seconds = String(myTime.getUTCSeconds()).padStart(2, "0");
+        const formattedTime = `${hours}:${minutes}:${seconds}`;
+        time.innerHTML = formattedTime;
+    }, 1000);
+
     const sshKey = document.getElementById("sshKey")?.innerHTML;
     function copySshKeyToClipboard() {
         navigator.clipboard
