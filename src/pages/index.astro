@@ -36,7 +36,7 @@ watching Anime or solving Rubik's cubes fast.`.trimStart();
                         class="h-[100%] object-cover"
                     />
                     <pre
-                        class="copySshKey text-[75%] flex-1 hover:text-[var(--secondary)]">{fingerprint}</pre>
+                        class="sshKeyCopy text-[75%] hover:text-[var(--secondary)]">{fingerprint}</pre>
                 </div>
             </TerminalBorder>
             <TerminalBorder header="GitHub">
@@ -45,7 +45,22 @@ watching Anime or solving Rubik's cubes fast.`.trimStart();
                 </Link>
             </TerminalBorder>
             <TerminalBorder header="Email">
-                <span>Kyren223@proton.me</span>
+                <span id="email" class="flex-1">Kyren223@proton.me</span>
+                <button class="emailCopy hover:text-gray-700">
+                    <svg
+                        width="100%"
+                        height="100%"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                    >
+                        <path
+                            fill="currentColor"
+                            fill-rule="evenodd"
+                            d="M4 2a2 2 0 00-2 2v9a2 2 0 002 2h2v2a2 2 0 002 2h9a2 2 0 002-2V8a2 2 0 00-2-2h-2V4a2 2 0 00-2-2H4zm9 4V4H4v9h2V8a2 2 0 012-2h5zM8 8h9v9H8V8z"
+                        ></path>
+                    </svg>
+                </button>
             </TerminalBorder>
             <TerminalBorder header="Timezone">
                 <div class="flex justify-between w-full">
@@ -55,17 +70,15 @@ watching Anime or solving Rubik's cubes fast.`.trimStart();
             </TerminalBorder>
             <div class="w-[334%]">
                 <TerminalBorder header="SSH Key">
-                    <div class="w-[100%] flex items-center space-x-2 group">
+                    <div
+                        class="sshKeyCopy w-[100%] flex items-center space-x-2 group"
+                    >
                         <span
                             id="sshKey"
                             class="hover:text-[var(--alt)] cursor-pointer truncate flex-1 group-hover:text-[var(--alt)]"
                             >{sshKey}</span
                         >
-                        <button
-                            id="sshKeyCopy"
-                            type="button"
-                            class="group-hover:text-[var(--alt)]"
-                        >
+                        <button class="group-hover:text-gray-700">
                             <svg
                                 width="100%"
                                 height="100%"
@@ -87,9 +100,9 @@ watching Anime or solving Rubik's cubes fast.`.trimStart();
         <div id="right" class="column">
             <TerminalBorder header="Status">
                 <p>
-                    Working on
-                    <Link href="https://github.com/KapiMC/Kapi">Kapi </Link>
-                    | Learning Web Development | Available for hire
+                    Working on <Link href="https://github.com/KapiMC/Kapi"
+                        >Kapi
+                    </Link> | Learning Web Development | Available for hire
                 </p>
             </TerminalBorder>
             <TerminalBorder header="About Me" margin="20px 0">
@@ -111,36 +124,46 @@ watching Anime or solving Rubik's cubes fast.`.trimStart();
 </Terminal>
 
 <script>
-    const utcOffset = 2;
-    const time = document.getElementById("time")!;
-    setInterval(() => {
-        console.log("Hit");
-        const now = new Date();
-        const myTime = new Date(now.getTime() + utcOffset * 3600 * 1000);
-        const hours = String(myTime.getUTCHours()).padStart(2, "0");
-        const minutes = String(myTime.getUTCMinutes()).padStart(2, "0");
-        const seconds = String(myTime.getUTCSeconds()).padStart(2, "0");
-        const formattedTime = `${hours}:${minutes}:${seconds}`;
-        time.innerHTML = formattedTime;
-    }, 1000);
-
-    const sshKey = document.getElementById("sshKey")?.innerHTML;
-    function copySshKeyToClipboard() {
-        navigator.clipboard
-            .writeText(sshKey ? sshKey : "")
-            .then(() => {
-                console.log("Clicked");
-                // TODO: show some feedback for copying
-            })
-            .catch((_err) => {
-                console.log("Error copying!");
-                // TODO: show same feedback but with err
-            });
+    function copyToClipboard(text: string) {
+        return function () {
+            console.log("Clicked");
+            navigator.clipboard
+                .writeText(text)
+                .then(() => {
+                    console.log("Copied");
+                    // TODO: show some feedback for copying
+                })
+                .catch((_err) => {
+                    console.log("Error copying!");
+                    // TODO: show same feedback but with err
+                });
+        };
     }
 
-    document.querySelectorAll("copySshKey").forEach((elem) => {
-        elem.addEventListener("click", copySshKeyToClipboard);
+    const sshKey = document.getElementById("sshKey")!;
+    document.querySelectorAll(".sshKeyCopy").forEach((elem) => {
+        elem.addEventListener("click", copyToClipboard(sshKey.innerHTML));
     });
+
+    const email = document.getElementById("email")!;
+    document.querySelectorAll(".emailCopy").forEach((elem) => {
+        elem.addEventListener("click", copyToClipboard(email.innerHTML));
+    });
+
+    const utcOffset = 2;
+    const time = document.getElementById("time")!;
+    setInterval(
+        () => {
+            const now = new Date();
+            const myTime = new Date(now.getTime() + utcOffset * 3600 * 1000);
+            const hours = String(myTime.getUTCHours()).padStart(2, "0");
+            const minutes = String(myTime.getUTCMinutes()).padStart(2, "0");
+            const formattedTime = `${hours}:${minutes}`;
+            time.innerHTML = formattedTime;
+        },
+        0,
+        60 * 1000,
+    );
 </script>
 
 <style>
