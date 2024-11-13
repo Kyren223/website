@@ -1,7 +1,14 @@
 ---
+import { getCollection } from "astro:content";
 import Terminal from "../layouts/Terminal.astro";
 import TerminalBorder from "../components/TerminalBorder.astro";
 import Link from "../components/Link.astro";
+import BlogItem from "../components/BlogItem.astro";
+
+const latestBlog = (await getCollection("blogs")).reduce((latest, blog) => {
+    const blogDate = new Date(blog.data.date);
+    return blogDate > new Date(latest.data.date) ? blog : latest;
+});
 
 const sshKey = `ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO7P9K9D5RkBk+JCRRS6AtHuTAc6cRpXfRfRMg/Kyren`;
 const fingerprint = `
@@ -108,17 +115,13 @@ watching Anime or solving Rubik's cubes fast.`.trimStart();
             <TerminalBorder header="About Me" margin="20px 0">
                 <p>{aboutMe}</p>
             </TerminalBorder>
-            <TerminalBorder header="Links">
-                <p>
-                    <Link href="https://github.com/Kyren223"
-                        >github.com/Kyren223</Link
-                    >
-                    <br />
-                    <Link href="https://discord.com/users/481884415090229258"
-                        >discord.com/Kyren223</Link
-                    >
-                </p>
-            </TerminalBorder>
+            <BlogItem
+                header="Latest Blog Post"
+                title={latestBlog.data.title}
+                description={latestBlog.data.description}
+                date={latestBlog.data.date}
+                href={"/blogs/" + latestBlog.slug}
+            />
         </div>
     </div>
 </Terminal>

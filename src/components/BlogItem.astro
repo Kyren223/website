@@ -1,17 +1,35 @@
 ---
 import TerminalBorder from "../components/TerminalBorder.astro";
 
+function formatDate(date: Date) {
+    const day = date.getDate();
+    const month = date.toLocaleString("default", { month: "long" });
+    const year = date.getFullYear();
+
+    let suffix = "th";
+    if (day === 1 || day === 21 || day === 31) {
+        suffix = "st";
+    } else if (day === 2 || day === 22) {
+        suffix = "nd";
+    } else if (day === 3 || day === 23) {
+        suffix = "rd";
+    }
+
+    return `${month} ${day}${suffix} ${year}`;
+}
+
 interface Props {
     title: string;
     description: string;
-    date: string;
+    date: Date;
     href: string;
+    header?: string;
 }
 
-const { title, description, date, href } = Astro.props;
+const { title, description, date, href, header } = Astro.props;
 ---
 
-<TerminalBorder footer={date} margin="0 0 20px;">
+<TerminalBorder header={header} footer={formatDate(date)} margin="0 0 20px;">
     <span class="cursor-pointer group block w-full">
         <a href={href} style="all: unset;">
             <h1 class="text-[130%] text-[var(--accent)] group-hover:underline">
