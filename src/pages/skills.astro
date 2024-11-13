@@ -14,14 +14,20 @@ const data = [
 
 const langs = ["Java", "C/C++", "Golang", "Kotlin", "Rust", "Lua"];
 const tools = [
-    "NeoVim",
-    "Linux",
     "Git & GitHub",
-    "SQL and NoSQL Databases",
+    "Sqlite3",
+    "Neovim and IntelliJ",
+    "Linux",
+];
+const frameworks = [
+    "Spigot API",
+    "Bubbletea",
+    "Astro",
 ];
 const thing = "▓▓▓▓▓▓▓▓▓▓░░░░░░░░░░";
 const fight = [
     "FP          ▓▓▓▓▓▓▓▓▓▓░░░░░░░░░░ OOP",
+    "Composition ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░ Inheritance",
     "Composition ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░ Inheritance",
 ];
 ---
@@ -32,6 +38,11 @@ const fight = [
             <TerminalBorder header="Languages">
                 <div class="grid md:grid-cols-3 items-center gap-x-8">
                     {langs.map((lang) => <p>{lang}</p>)}
+                </div>
+            </TerminalBorder>
+            <TerminalBorder header="Frameworks">
+                <div class="grid md:grid-cols-1 items-center gap-x-8">
+                    {frameworks.map((framework) => <p>{framework}</p>)}
                 </div>
             </TerminalBorder>
             <TerminalBorder header="Tools">
@@ -49,7 +60,7 @@ const fight = [
                 >
             </TerminalBorder>
         </div>
-        <div class="w-[40%]">
+        <div class="w-[40%] pl-4">
             <RadarChart max={max} data={data} />
         </div>
     </div>
