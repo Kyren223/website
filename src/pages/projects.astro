@@ -4,50 +4,52 @@ import Project from "../components/Project.astro";
 ---
 
 <Terminal path="skills">
-    <div class="grid grid-cols-2 gap-4">
-        <div class="col-span-1">
-            <Project
-                title="Kapi"
-                description="Minecraft Plugins Framework"
-                href="https://github.com/KapiMC/Kapi"
-            >
-                A complete "batteries included" framework to streamline the process 
-                of plugin development by empowering developers with utilities that
-                make developing impressive plugins a breeze
-            </Project>
-        </div>
-        <div class="col-span-1">
-            <Project
-                title="Kapi"
-                description="Hello"
-                href="https://github.com/KapiMC/Kapi"
-            >
-                A bunch of text
-            </Project>
-        </div>
-        <div class="col-span-3 grid grid-cols-3 gap-4">
-            <Project
-                title="Trident"
-                description="IntelliJ Plugin"
-                href="https://github.com/Kyren223/Trident"
-            >
-                The fastest way to navigate to your most used files, with the
-                least amount of keystrokes!
-            </Project>
-            <Project
-                title="Kapi"
-                description="Hello"
-                href="https://github.com/KapiMC/Kapi"
-            >
-                A bunch of text
-            </Project>
-            <Project
-                title="Kapi"
-                description="Hello"
-                href="https://github.com/KapiMC/Kapi"
-            >
-                A bunch of text
-            </Project>
+    <div class="w-full max-w-full">
+        <div class="grid gap-4 grid-cols-[2fr_1fr]">
+            <div class="">
+                <Project
+                    title="Kapi"
+                    description="Minecraft Plugins Framework"
+                    href="https://github.com/KapiMC/Kapi"
+                >
+                    A complete "batteries included" framework to streamline the
+                    process of plugin development by empowering developers with
+                    utilities that make developing impressive plugins a breeze
+                </Project>
+            </div>
+            <div>
+                <Project
+                    title="Kapi"
+                    description="Hello"
+                    href="https://github.com/KapiMC/Kapi"
+                >
+                    A bunch of text
+                </Project>
+            </div>
+            <div class="col-span-2 grid grid-cols-[1fr_1fr_1fr] gap-4">
+                <Project
+                    title="Trident"
+                    description="IntelliJ Plugin"
+                    href="https://github.com/Kyren223/Trident"
+                >
+                    A blazingly fast way to navigate to your most used files,
+                    minimize keystrokes and maximize productivity!
+                </Project>
+                <Project
+                    title="Kapi"
+                    description="Hello"
+                    href="https://github.com/KapiMC/Kapi"
+                >
+                    A bunch of text
+                </Project>
+                <Project
+                    title="Kapi"
+                    description="Hello"
+                    href="https://github.com/KapiMC/Kapi"
+                >
+                    A bunch of text
+                </Project>
+            </div>
         </div>
     </div>
 </Terminal>
