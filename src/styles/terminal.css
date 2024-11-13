@@ -49,6 +49,7 @@ main {
   background: var(--background);
   padding: 1.75rem;
   width: 55rem;
+  height: 75%;
   max-width: 75%;
   max-height: 75%;
   overflow: hidden;
