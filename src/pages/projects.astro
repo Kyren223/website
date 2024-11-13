@@ -4,19 +4,19 @@ import Project from "../components/Project.astro";
 ---
 
 <Terminal path="skills">
-    <div class="grid grid-rows-2 mt-2 space-y-4">
-        <div class="grid grid-cols-2 items-center gap-x-8">
+    <div class="grid grid-cols-2 gap-4">
+        <div class="col-span-1">
             <Project
                 title="Kapi"
-                description="Minecraft Framework"
+                description="Minecraft Plugins Framework"
                 href="https://github.com/KapiMC/Kapi"
             >
-                A bunch of text
-                A bunch of text
-                A bunch of text
-                A bunch of text
-                A bunch of text
+                A complete "batteries included" framework to streamline the process 
+                of plugin development by empowering developers with utilities that
+                make developing impressive plugins a breeze
             </Project>
+        </div>
+        <div class="col-span-1">
             <Project
                 title="Kapi"
                 description="Hello"
@@ -25,13 +25,14 @@ import Project from "../components/Project.astro";
                 A bunch of text
             </Project>
         </div>
-        <div class="grid grid-cols-3 items-center gap-x-8">
+        <div class="col-span-3 grid grid-cols-3 gap-4">
             <Project
                 title="Trident"
                 description="IntelliJ Plugin"
                 href="https://github.com/Kyren223/Trident"
             >
-                The fastest way to navigate to your most used files, with the least amount of keystrokes!
+                The fastest way to navigate to your most used files, with the
+                least amount of keystrokes!
             </Project>
             <Project
                 title="Kapi"
