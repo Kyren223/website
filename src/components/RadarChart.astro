@@ -1,24 +1,24 @@
 ---
-// const { data } = Astro.props;
+import "../styles/terminal.css"
 
-const data = [
-    { name: "React", total: 10 },
-    { name: "GraphQL", total: 5 },
-    { name: "JavaScript", total: 5 },
-    { name: "SVG", total: 1 },
-    { name: "TypeScript", total: 5 },
-];
+interface Entry {
+    name: string;
+    weight: number;
+}
+
+interface Props {
+    max: number
+    data: Entry[];
+}
+
+const { max, data } = Astro.props
 
 const chartPadding = 100;
 const chartSize = 400;
 const chartCenter = chartSize / 2;
 
-const chartData = data.sort((a, b) => b.total - a.total).slice(0, data.length);
+const chartData = data ;// .sort((a, b) => b.weight - a.weight).slice(0, data.length);
 const pointPadding = 0;
-const max = chartData.reduce(
-    (max, current) => (current.total > max ? current.total : max),
-    0,
-);
 const rings = [...Array(6).keys()];
 
 const getX = (angle: number, value: number) =>
@@ -42,7 +42,7 @@ const axes = chartData.map((_, index) => {
 });
 
 const properties = chartData.map((item, index) => {
-    const { name, total } = item;
+    const { name, weight: total } = item;
     const clamp = Number(total / (max + pointPadding));
     const angle = (Math.PI * 2 * index) / chartData.length;
     const x = getX(angle, (clamp * chartSize) / 2);
@@ -57,13 +57,10 @@ const shape =
         return items + string;
     }, "") + "z";
 
-const bgColor = "bg-blue-500";
-const borderColor = "border-gray-100";
-const strokeColor = "stroke-gray-200";
-const shapeClass = "stroke-gray-900 fill-gray-900/[0.5]";
----
+const strokeColor = "stroke-[var(--alt)]";
+const shapeClass = "stroke-[var(--primary)] fill-[#7ed4fb]/50";
 
-<div class=`w-[25%] m-0 p-0 ${bgColor} border rounded ${borderColor} shadow-lg`>
+---
     <div class="w-full grid md:grid-cols-1 items-center gap-16 p-0">
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -108,17 +105,20 @@ const shapeClass = "stroke-gray-900 fill-gray-900/[0.5]";
                         const angle = (Math.PI * 2) * index / chartData.length;
                         const maxX = getX(angle, (length * chartSize) / 2);
                         const maxY = getY(angle, (length * chartSize) / 2);
-                        const textAngle = (angle * (180 / Math.PI))
+                        let textAngle = (angle * (180 / Math.PI))
+                        if (90 < textAngle && textAngle < 270) {
+                            textAngle += 180
+                        }
                         return (
                             <g transform={`translate(${maxX},${maxY})`}>
                                 <text
                                     x={0}
                                     y={0}
-                                fill="#000000"
-                                font-size="16px"
+                                    fill="var(--secondary)"
+                                    font-size="24px"
                                     text-anchor="middle"
-                                    dominant-baseline="middle"
                                     transform=`rotate(${textAngle})`
+                                    dominant-baseline="middle"
                                 >
                                     {property.name}
                                 </text>
@@ -129,4 +129,3 @@ const shapeClass = "stroke-gray-900 fill-gray-900/[0.5]";
             </g>
         </svg>
     </div>
-</div>

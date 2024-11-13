@@ -1,6 +1,32 @@
 ---
 import Terminal from "../layouts/Terminal.astro";
+import RadarChart from "../components/RadarChart.astro";
+
+const data1 = [
+    { name: "Backend", weight: 40 },
+    { name: "Gamedev", weight: 70 },
+    { name: "Frontend", weight: 5 },
+    { name: "Low-Level", weight: 63 },
+    { name: "Tooling", weight: 100 },
+];
+
+const data = [
+    { name: "Gamedev", weight: 70 },
+    { name: "Backend", weight: 40 },
+    { name: "Low-Level", weight: 63 },
+    { name: "Tooling", weight: 100 },
+    { name: "Frontend", weight: 15 },
+];
+
+
+const max = data.reduce(
+    (max, current) => (current.weight > max ? current.weight : max),
+    0,
+);
 ---
 
 <Terminal path="skills">
+    <div class="w-[40%]">
+        <RadarChart max={100} data={data} />
+    </div>
 </Terminal>
