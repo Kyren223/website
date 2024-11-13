@@ -1,0 +1,25 @@
+---
+import TerminalBorder from "../components/TerminalBorder.astro";
+import Link from "../components/Link.astro";
+
+interface Props {
+    title: string;
+    description: string;
+    href: string;
+}
+
+const { title, description, href } = Astro.props;
+---
+
+<div class="flex-column">
+    <TerminalBorder>
+        <span>
+            <h1 class="inline-block text-[130%] text-[var(--accent)]">{title}</h1>
+            <p class="inline-block text-[var(--secondary)]">{description}</p>
+            <span class="block my-2"><slot /></span>
+        </span>
+    </TerminalBorder>
+    <TerminalBorder header="Shell">
+        <Link href={href}>cd ~/projects/{title}</Link>
+    </TerminalBorder>
+</div>
