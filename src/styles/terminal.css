@@ -38,7 +38,7 @@ body {
 }
 
 main {
-  display: grid;
+  display: block;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -49,9 +49,9 @@ main {
   background: var(--background);
   padding: 1.75rem;
   width: 55rem;
-  height: 75%;
+  height: 77%;
   max-width: 75%;
-  max-height: 75%;
+  max-height: 80%;
   overflow: hidden;
 }
 
