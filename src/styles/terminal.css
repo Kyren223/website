@@ -1,4 +1,4 @@
-@import url("../styles/fonts/JetBrainsMono.css");
+@import url("@styles/fonts/JetBrainsMono.css");
 
 :root {
   --primary: #54d7a9;
