@@ -1,6 +1,9 @@
 ---
-import Blog from "@layouts/Blog.astro";
 import { getCollection } from "astro:content";
+import Blog from "@layouts/Blog.astro";
+import Markdown from "@components/Markdown.astro";
+import Terminal from "@layouts/Terminal.astro";
+import BlogItem from "@components/BlogItem.astro";
 
 export async function getStaticPaths() {
     const blogEntries = await getCollection("blogs");
@@ -14,6 +17,21 @@ const { entry } = Astro.props;
 const { Content } = await entry.render();
 ---
 
-<Blog title=`/home/kyren/blogs/${entry.slug}`>
-    <Content />
-</Blog>
+<Terminal path="blogs/">
+    <div class="w-full h-[65vh] overflow-y-auto pr-4">
+        <div class="flex flex-col h-full m-0 p-0">
+            <BlogItem
+                title={entry.data.title}
+                description={entry.data.description ?? ""}
+                date={entry.data.date}
+            />
+            <div class="text-[130%] flex-grow">
+                <Content />
+            </div>
+        </div>
+    </div>
+</Terminal>
+
+<!-- <Blog title=`/home/kyren/blogs/${entry.slug}`> -->
+<!--     <Content /> -->
+<!-- </Blog> -->

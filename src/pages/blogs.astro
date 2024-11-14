@@ -24,7 +24,7 @@ const blogs = (await getCollection("blogs"))
                 <>
                     <BlogItem
                         title={blog.title}
-                        description={blog.description ? blog.description : ""}
+                        description={blog.description ?? ""}
                         date={blog.date}
                         href={blog.href}
                     />

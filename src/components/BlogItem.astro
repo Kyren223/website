@@ -22,7 +22,7 @@ interface Props {
     title: string;
     description: string;
     date: Date;
-    href: string;
+    href?: string;
     header?: string;
 }
 
@@ -31,13 +31,20 @@ const { title, description, date, href, header } = Astro.props;
 
 <TerminalBorder header={header} footer={formatDate(date)} margin="0 0 20px;">
     <span class="cursor-pointer group block w-full">
-        <a href={href} style="all: unset;">
-            <h1 class="text-[130%] text-[var(--accent)] group-hover:underline">
-                {title}
-            </h1>
-            <p class="text-[var(--secondary)]">
-                {description}
-            </p>
-        </a>
+        {
+            href ? (
+                <a href={href} style="all: unset;">
+                    <h1 class="text-[130%] text-[var(--accent)] group-hover:underline">
+                        {title}
+                    </h1>
+                    <p class="text-[var(--secondary)]">{description}</p>
+                </a>
+            ) : (
+                <>
+                    <h1 class="text-[130%] text-[var(--accent)]">{title}</h1>
+                    <p class="text-[var(--secondary)]">{description}</p>
+                </>
+            )
+        }
     </span>
 </TerminalBorder>
