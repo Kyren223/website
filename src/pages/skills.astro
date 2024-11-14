@@ -5,30 +5,21 @@ import TerminalBorder from "@components/TerminalBorder.astro";
 
 const max = 100;
 const data = [
-    { name: "Gamedev", weight: 70 },
-    { name: "Backend", weight: 40 },
-    { name: "Low-Level", weight: 63 },
-    { name: "Tooling", weight: 100 },
+    { name: "Gamedev", weight: 80 },
+    { name: "Backend", weight: 50 },
+    { name: "Low-Level", weight: 70 },
+    { name: "Tooling", weight: 99 },
     { name: "Frontend", weight: 15 },
 ];
 
 const langs = ["Java", "C/C++", "Golang", "Kotlin", "Rust", "Lua"];
-const tools = [
-    "Git & GitHub",
-    "Sqlite3",
-    "Neovim and IntelliJ",
-    "Linux",
-];
-const frameworks = [
-    "Spigot API",
-    "Bubbletea",
-    "Astro",
-];
+const tools = ["Git & GitHub", "Sqlite3", "Neovim and IntelliJ", "Linux"];
+const frameworks = ["Spigot API", "Bubbletea", "Astro"];
 ---
 
-<Terminal path="skills">
+<Terminal path="skills.md">
     <div class="flex">
-        <div class="w-[60%] flex-column items-center ">
+        <div class="w-[60%] flex-column items-center">
             <TerminalBorder header="Languages">
                 <div class="grid md:grid-cols-3 items-center gap-x-8">
                     {langs.map((lang) => <p>{lang}</p>)}
