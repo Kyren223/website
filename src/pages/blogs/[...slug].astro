@@ -1,7 +1,5 @@
 ---
 import { getCollection } from "astro:content";
-import Blog from "@layouts/Blog.astro";
-import Markdown from "@components/Markdown.astro";
 import Terminal from "@layouts/Terminal.astro";
 import BlogItem from "@components/BlogItem.astro";
 
@@ -19,19 +17,37 @@ const { Content } = await entry.render();
 
 <Terminal path="blogs/">
     <div class="w-full h-[65vh] overflow-y-auto pr-4">
-        <div class="flex flex-col h-full m-0 p-0">
-            <BlogItem
-                title={entry.data.title}
-                description={entry.data.description ?? ""}
-                date={entry.data.date}
-            />
-            <div class="text-[130%] flex-grow">
+        <div class="text-[130%] h-full m-0 p-0">
+            <div class="text-[110%]">
+                <BlogItem
+                    title={entry.data.title}
+                    description={entry.data.description ?? ""}
+                    date={entry.data.date}
+                />
+            </div>
+            <div class="markdown">
+                <h2>Somewhat of a long heading</h2>
                 <Content />
             </div>
         </div>
     </div>
 </Terminal>
 
-<!-- <Blog title=`/home/kyren/blogs/${entry.slug}`> -->
-<!--     <Content /> -->
-<!-- </Blog> -->
+<style is:global>
+    .markdown p {
+        padding-bottom: 1rem;
+    }
+    .markdown strong {
+        font-weight: bold;
+    }
+    .markdown h2 {
+        color: var(--secondary);
+        font-size: 125%;
+        padding-bottom: 0.5rem;
+    }
+    .markdown h3 {
+        color: var(--secondary);
+        font-size: 110%;
+        padding-bottom: 0.25rem;
+    }
+</style>

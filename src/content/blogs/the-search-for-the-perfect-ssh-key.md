@@ -1,14 +1,12 @@
 ---
 title: The search for the perfect SSH key
-description: Here's how you can embed your name in an SSH key
+description: How you can embed your name in an SSH key
 date: 2024-11-14
 ---
 
-# The search for the perfect SSH key
-
-SSH keys are widely used among developers,
+SSH keys are a widely used tool among developers,
 they are the equivalent of a username and password in the development world.
-They enable you to prove you are who you claim to be and they are the gateway
+They allow you to prove your identity and they are the gateway
 into accessing servers remotely in a secure manner.
 
 ### The ssh public key format
@@ -32,7 +30,7 @@ Let's break it down
   - the length of the key, 32 bytes for ed25519 (4 bytes long)
   - the raw bytes for the ed25519 key (32 bytes long)
 
-### Embedding a word in base64
+## Embedding a word in base64
 
 Base64 is a widely used format for displaying binary in a compact and human readable way,
 it uses A-Z, a-z, 0-9, '/' and '+' adding up to 64 unique characters.
