@@ -7,14 +7,20 @@ import TerminalBorder from "@components/TerminalBorder.astro";
 
 export async function getStaticPaths() {
     const blogEntries = await getCollection("blogs");
-    return blogEntries.map((entry) => ({
-        params: { slug: entry.slug },
-        props: { entry },
+    return blogEntries.map((blog) => ({
+        params: { slug: blog.slug },
+        props: { entry: blog },
     }));
 }
 
 const { entry } = Astro.props;
 const { Content } = await entry.render();
+
+const blogs = await getCollection("blogs");
+const sortedBlogs = blogs.sort((a, b) => +b.data.date - +a.data.date);
+const currentIndex = sortedBlogs.findIndex((blog) => blog.slug === entry.slug);
+const previousBlog = sortedBlogs[currentIndex + 1] || undefined;
+const nextBlog = sortedBlogs[currentIndex - 1] || undefined;
 ---
 
 <Terminal path="blogs/">
@@ -30,18 +36,35 @@ const { Content } = await entry.render();
             <div class="markdown">
                 <Content components={{ a: Link }} />
             </div>
-            <div class="ml-[1px] pt-2 grid grid-cols-[1fr_1fr] gap-4">
-                <div class="min-w-0 invisible"></div>
-                <TerminalBorder header="Previous Blog">
-                    <Link href="next" newTab={false}
-                        >vim ~/blogs/next-blog.md</Link
-                    >
-                </TerminalBorder>
-                <TerminalBorder header="Next Blog">
-                    <Link href="next" newTab={false}
-                        >vim ~/blogs/next-blog.md</Link
-                    >
-                </TerminalBorder>
+            <div class="px-[1px] py-2 grid grid-cols-2 gap-4">
+                {
+                    previousBlog ? (
+                        <TerminalBorder header="Previous Blog">
+                            <span class="text-[var(--secondary)] truncate flex-1">
+                                <Link href={previousBlog.slug} newTab={false}>
+                                    vim ~/blogs/{previousBlog.slug}.md
+                                </Link>
+                            </span>
+                        </TerminalBorder>
+                    ) : (
+                        <div class="min-w-0 invisible" />
+                    )
+                }
+                {
+                    nextBlog ? (
+                        <TerminalBorder header="Next Blog">
+                            <div class="w-full  flex items-center">
+                                <span class="text-[var(--secondary)] truncate flex-1">
+                                    <Link href={nextBlog.slug} newTab={false}>
+                                        vim ~/blogs/{nextBlog.slug}.md
+                                    </Link>
+                                </span>
+                            </div>
+                        </TerminalBorder>
+                    ) : (
+                        <div class="min-w-0 invisible" />
+                    )
+                }
             </div>
         </div>
     </div>
