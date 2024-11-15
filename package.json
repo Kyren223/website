@@ -11,16 +11,13 @@
   },
   "dependencies": {
     "@astrojs/mdx": "^3.1.9",
-    "@astrojs/starlight": "^0.29.0",
     "@astrojs/tailwind": "^5.1.2",
     "@expressive-code/plugin-line-numbers": "^0.38.3",
     "astro": "^4.16.10",
     "astro-expressive-code": "^0.38.3",
-    "chart.js": "^4.4.6",
     "tailwindcss": "^3.4.14"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "^0.5.15",
     "prettier": "^3.3.3",
     "prettier-plugin-astro": "^0.14.1",
     "typescript": "^5.6.3"

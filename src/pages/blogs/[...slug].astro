@@ -2,6 +2,8 @@
 import { getCollection } from "astro:content";
 import Terminal from "@layouts/Terminal.astro";
 import BlogItem from "@components/BlogItem.astro";
+import Link from "@components/Link.astro";
+import TerminalBorder from "@components/TerminalBorder.astro";
 
 export async function getStaticPaths() {
     const blogEntries = await getCollection("blogs");
@@ -16,8 +18,8 @@ const { Content } = await entry.render();
 ---
 
 <Terminal path="blogs/">
-    <div class="w-full h-[65vh] overflow-y-auto pr-4">
-        <div class="text-[130%] h-full m-0 p-0">
+    <div class="w-full h-[65vh] overflow-y-auto pr-4 border-box">
+        <div class="text-[130%] h-full">
             <div class="text-[110%]">
                 <BlogItem
                     title={entry.data.title}
@@ -26,16 +28,50 @@ const { Content } = await entry.render();
                 />
             </div>
             <div class="markdown">
-                <h2>Somewhat of a long heading</h2>
-                <Content />
+                <Content components={{ a: Link }} />
+            </div>
+            <div class="ml-[1px] pt-2 grid grid-cols-[1fr_1fr] gap-4">
+                <div class="min-w-0 invisible"></div>
+                <TerminalBorder header="Previous Blog">
+                    <Link href="next" newTab={false}
+                        >vim ~/blogs/next-blog.md</Link
+                    >
+                </TerminalBorder>
+                <TerminalBorder header="Next Blog">
+                    <Link href="next" newTab={false}
+                        >vim ~/blogs/next-blog.md</Link
+                    >
+                </TerminalBorder>
             </div>
         </div>
     </div>
 </Terminal>
 
 <style is:global>
+    .markdown {
+        user-select: text;
+    }
+    .markdown a {
+        display: inline-block;
+        font-weight: normal;
+    }
+    .markdown code {
+        background: #333333;
+        color: var(--accent);
+        padding: 0 0.5rem;
+    }
+    .markdown ul {
+        list-style-type: square;
+        margin-left: 1rem;
+        margin-bottom: 1rem;
+        font-size: 90%;
+    }
+    .markdown li {
+        margin-bottom: 0.5rem;
+    }
     .markdown p {
-        padding-bottom: 1rem;
+        margin-bottom: 1rem;
+        user-select: text;
     }
     .markdown strong {
         font-weight: bold;
@@ -43,11 +79,14 @@ const { Content } = await entry.render();
     .markdown h2 {
         color: var(--secondary);
         font-size: 125%;
-        padding-bottom: 0.5rem;
+        margin-bottom: 0.5rem;
     }
     .markdown h3 {
         color: var(--secondary);
         font-size: 110%;
-        padding-bottom: 0.25rem;
+        margin-bottom: 0.25rem;
+    }
+    .expressive-code {
+        margin-bottom: 1rem;
     }
 </style>

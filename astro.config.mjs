@@ -16,6 +16,10 @@ export default defineConfig({
       defaultProps: {
         showLineNumbers: false,
       },
+      styleOverrides: {
+        borderColor: ({ theme }) => theme.colors["editor.background"],
+        borderRadius: "0",
+      },
     }),
     mdx(),
   ],
