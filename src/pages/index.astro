@@ -13,15 +13,15 @@ const latestBlog = (await getCollection("blogs")).reduce((latest, blog) => {
 const sshKey = `ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO7P9K9D5RkBk+JCRRS6AtHuTAc6cRpXfRfRMg/Kyren`;
 const fingerprint = `
 +--[ED25519 256]--+
-|+o.+oE*B%* o     |
-|o=...+++=.+ +    |
-|o B . o. . o +   |
-|.+ + o .    =    |
-|. + .   S  o +   |
-| . o      . +    |
-|. .        .     |
-|..               |
-|.                |
+|       +. ..  +.B|
+|      + o..o . BB|
+|     ..o oo.o =+E|
+|     ... oo. + o.|
+|      . S .   =  |
+|  .  .   +   o   |
+| o    o o .      |
+|  oo .o+ +       |
+|  ++ooo+=        |
 +----[SHA256]-----+`.trimStart();
 
 const aboutMe = `
