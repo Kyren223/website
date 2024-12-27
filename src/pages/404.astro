@@ -7,9 +7,15 @@ const url = new URL(Astro.request.url).pathname.substring(1);
 <Terminal path="404">
     <TerminalBorder header="Shell" margin="0.5rem 0">
         <span>
-            <p>$ cd ~/{url}</p>
-            <p class="pt-3">"{url}": No such file or directory (os error 2)</p>
+            <p id="cd">$ cd ~/{url}</p>
+            <p id="err" class="pt-3">"{url}": No such file or directory (os error 2)</p>
         </span>
     </TerminalBorder>
 </Terminal>
-
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const url = window.location.pathname.substring(1);
+        document.getElementById("cd")!.textContent = `$ cd ~/${url}`;
+        document.getElementById("err")!.textContent = `"${url}": No such file or directory (os error 2)`;
+    });
+</script>
