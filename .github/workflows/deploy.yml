@@ -25,6 +25,8 @@ jobs:
 
       - name: Deploy to server
         run: |
-          rsync -avz --delete dist/ website@kyren.codes:/srv/website --rsh="ssh -i <(echo \"$SSH_PRIVATE_KEY\")"
+          echo "$SSH_PRIVATE_KEY" > /tmp/temp_key && chmod 600 /tmp/temp_key
+          scp -i /tmp/temp_key -r dist/* website@185.170.113.195:/srv/website
+          rm /tmp/temp_key
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
