@@ -24,9 +24,10 @@ jobs:
         run: npm run build
 
       - name: Deploy to server
-        run: |
-          echo "$SSH_PRIVATE_KEY" > /tmp/temp_key && chmod 600 /tmp/temp_key
-          scp -i /tmp/temp_key -r dist/* website@185.170.113.195:/srv/website
-          rm /tmp/temp_key
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: 185.170.113.195
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: "dist/*"
+          target: "/srv/website"
