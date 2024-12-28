@@ -24,10 +24,18 @@ jobs:
         run: npm run build
 
       - name: Deploy to server
-        uses: appleboy/scp-action@v0.1.7
+        uses: easingthemes/ssh-deploy@main
         with:
-          host: 185.170.113.195
-          username: website
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: "dist/*"
-          target: "/srv/website"
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          ARGS: "-avz --delete"
+          SOURCE: "dist/"
+          REMOTE_HOST: 185.170.113.195
+          REMOTE_USER: website
+          TARGET: "/srv/website"
+          SCRIPT_BEFORE: |
+            whoami
+            ls -al
+          SCRIPT_AFTER: |
+            whoami
+            ls -al
+            echo $RSYNC_STDOUT
