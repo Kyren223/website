@@ -27,7 +27,7 @@ jobs:
         uses: appleboy/scp-action@v0.1.7
         with:
           host: 185.170.113.195
-          username: ${{ secrets.USERNAME }}
+          username: website
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: "dist/*"
           target: "/srv/website"
