@@ -1,6 +1,7 @@
 ---
 import "@styles/terminal.css";
 import Nav from "@components/Nav.astro";
+import Head from "@components/Head.astro";
 
 interface Props {
     path: string;
@@ -11,14 +12,7 @@ const { path: title } = Astro.props;
 
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="description" content="Astro description" />
-        <meta name="viewport" content="width=device-width" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <meta name="generator" content={Astro.generator} />
-        <title>/home/kyren/{title}</title>
-    </head>
+    <Head title=`/home/kyren/${title}` description="My personal website" />
     <body>
         <main>
             <Nav path={title} />
