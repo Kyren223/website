@@ -9,16 +9,21 @@ const { title, description } = Astro.props;
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="description" content={description} />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
+    <meta name="robots" content="index, follow, noarchive">
+    <meta name="keywords" content="Kyren223, Kapi, Minecraft, Developer">
+    <meta name="author" content="Kyren223">
+    <meta name="description" content={description} />
     <title>{title}</title>
 
     <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://kyren.codes/" />
-    <meta property="og:description" content={description} />
-    <meta property="og:image" content="https://kyren.codes/image.png">
+    <meta property="og:image" content="/image.png">
     <meta property="og:image:alt" content="a cyan sphere with a dark background">
+    <meta property="og:site_name" content="Kyren's Website">
 </head>
