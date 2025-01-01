@@ -1,0 +1,287 @@
+---
+title: "NixOS: The perfect distro for a production server"
+description: My experience using NixOS to manage my production VPS
+date: 2025-01-01
+---
+
+NixOS is a linux distribution praised for it's functional-style declarative
+configuration that allows you to manage the entire system through the Nix
+programming language, making your sytem reproducible and more reliable.
+
+This is in contrast to other linux distros that use a more imperative approach
+of managing the system by running commands to install packages, create
+users, etc.
+
+## NixOS as a daily-driver operating system
+
+About half a year ago I started using Windows subsystem for linux which enabled
+me to run a linux distro in the terminal, 6 weeks ago I finally decided to make
+the jump and switch from windows to a full linux desktop experience.
+
+I wanted a linux distro with a large set of latest-version packages but still
+stable without risk of getting my system broken (sorry Arch).
+
+I was considering going with Tumbleweed, a rolling release distro
+by openSUSE which I was already familiar with because I was using it in WSL.
+
+But then I remembered Nix, this weird thing that is an operating system,
+programming language, and a package manager.
+
+Nixpkgs is the the package repository with the most fresh packages (even more than AUR),
+and it has a really cool benefit of being able to install all my packages
+through a config file, similar to NVIM with lazy.nvim or rust with cargo.
+
+Initially I was considering using something like Debian with nixpkgs as I heard
+that was possible, but some people warned me that it's a bad idea to not use
+the native package manager, so I ended up **going with NixOS as my first linux
+distro on desktop**.
+
+I followed a [great video about installing NixOS](https://www.youtube.com/watch?v=a67Sv4Mbxmc) by Vimjoyer
+and was able to get it up and running.
+Although I experienced some issues in the first few days, that was expected
+and I was able to solve all of them.
+
+One trap to be aware of is the nix community is sometimes too enthusiastic and
+will try to convince you to do things "the nix way" like rewriting your
+perfectly fine existing configs in nix or moving from stow to home manager.
+
+In my opinion, I don't want to waste so much time configuring everything,
+I am OK with only configuring system settings and packages while having things
+like other dotfiles or scripts be handled the "normal linux way".
+
+## NixOS as a production server distro
+
+A few days ago I got my first VPS, a RS 1000 from netcup (use code
+`36nc17355743780` for a $5 discount),
+my goal with it was to host my website along with some other self-hosted apps
+including my own server for a terminal-based social media I am working on
+(which I will make a blog post about in the future).
+
+Infrastructure as code (IaC) is the practice of managing servers through
+configuration files rather than manual instructions (such as running commands),
+this has several benefits such as being able to use version control and ensuring
+a more reproducible server that can be easily deployed and updated using these
+files.
+
+This is where NixOS comes in and really shines, all these "nix ways" of
+configuring stuff as a desktop OS seems overkill and time consuming but for a
+server that's exactly the point, to be able to reproduce the entire system
+from only a bunch of nix files.
+
+## Configuring a server with NixOS
+
+After struggling to install NixOS, I discovered [NixOS Anywhere](https://github.com/nix-community/nixos-anywhere)
+which made it very easy to install remotely through SSH.
+
+First thing was setting up proper SSH authentication and security.
+
+Nix makes it really simple to do, just add these 2 lines to enable ssh
+but disable the insecure password authentication
+
+```nix
+services.openssh.enable = true;
+services.openssh.settings.PasswordAuthentication = false;
+```
+
+And to add a public key to connect with to the root user
+
+```nix
+users.users.root.openssh.authorizedKeys.keys = [
+  "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO7P9K9D5RkBk+JCRRS6AtHuTAc6cRpXfRfRMg/Kyren"
+];
+```
+
+If you would like to know how I generated a key that ends with `/Kyren` read
+my first blog post - [The search for the perfect ssh key](http://localhost:4321/blogs/the-search-for-the-perfect-ssh-key)
+
+### Managing secrets with sops-nix
+
+Next, before we can get into configuring a webserver, we need a good way
+to store secrets for things like SSL certifications, [sops-nix](https://github.com/Mic92/sops-nix) is a nix module
+that integrates the [sops CLI tool](https://github.com/getsops/sops) into nix.
+
+Rather than having to set up 20 different secrets for each thing, it allows
+us only setup 1 secret that is stored on the server and on the admin's
+system, then, any additional secret can be defined in a file that gets
+encrypted automatically by sops which can safely be committed into version control.
+
+At runtime sops will write all these files to a directory which can then be
+accessed by anything that needs access to that secret, sops also makes it easy
+to let specific users or groups access to a specific secret.
+
+### Setting up automatic updates
+
+We have added sops-nix, but how can we get it into the server?
+
+The simple approach would be to ssh as root into the server, git clone the
+repository with the config and then run
+
+```sh
+nixos-rebuild switch --flake .#default
+```
+
+_assuming you are inside the git directory where your `flake.nix` is and your
+`nixosConfigurations` is called `default`_
+
+While that certainly works, a better approach would be to listen for changes
+to the git repository and automatically pull and rebuild the system.
+
+```nix
+system.autoUpgrade = {
+  enable = true;
+  flake = "github:kyren223/server#default";
+  dates = "minutely"; # Poll interval
+  flags = [
+    "--no-write-lock-file" # Prevent flake.lock from upgrading
+    "--option" "tarball-ttl" "0" # Required for polling below 1h
+  ];
+};
+```
+
+This will automatically run every minute to fetch the github repository
+and rebuild the system.
+
+But wait, what if the repository is private? that's where sops-nix comes in!
+
+```nix
+sops.secrets.github-access-token = { };
+nix.extraOptions = "!include /run/secrets/github-access-token";
+```
+
+The first line defines a new `github-access-token` secret, and the second line
+makes sure nix is aware of it so it can use it when trying to fetch the repo.
+
+Of course, make sure to define the secret in your `secrets.yml` file,
+The key would be `gituhb-access-token` and the value would be a github PAT
+token.
+It's recommended to only give the token read-only access to the repo's contents.
+
+## Serving a static website
+
+Now that we have a way to manage our secrets, and continious deployment of our
+nix configuration, we can finally start working on a website.
+
+The plan is to host multiple websites in the future so I'll be using [Nginx](https://nginx.org/en/)
+as a reverse proxy.
+
+```nix
+services.nginx.enable = true;
+services.nginx.virtualHosts."kyren.codes" = {
+  useACMEHost = "kyren.codes";
+  forceSSL = true;
+  locations."/" = {
+    index = "index.html";
+    root = "/srv/website";
+  };
+};
+```
+
+This enables nginx, which installs it on our system then defines a new virtual
+host with the domain `kyren.codes`, later if we were to host other sites, the
+virtualHost can be something like `git.kyren.codes`.
+
+The `locations."/"` sets the base url of our website to `/srv/website` which is
+where I have my website's static files, and nginx will serve `index.html` as
+the default page when you go to that domain, later I will explain how to setup
+continious deployment to automatically update this directory on push to master.
+
+The `useACMEHost` and `forceSSL` makes sure the server uses https, you'd need
+to get a SSL certificate from [Let's Encrypt](https://letsencrypt.org/), once
+again, Nix makes it really simple to do
+
+```nix
+# Define the token using nix, make sure the "acme" user can access it
+sops.secrets.cloudflare-dns-api-token = { mode = "0440"; owner = "acme"; };
+
+security.acme.acceptTerms = true;
+security.acme.defaults.email = "kyren223@proton.me"; # Your email
+
+security.acme.certs."kyren.codes" = {
+  domain = "kyren.codes";
+  extraDomainNames = [ "*.kyren.codes" ];
+  dnsProvider = "cloudflare";
+  environmentFile = "${pkgs.writeText "cf-creds" ''
+    CF_DNS_API_TOKEN_FILE=${config.sops.secrets.cloudflare-dns-api-token.path}
+  ''}";
+  webroot = null;
+};
+
+# Allow nginx to access acme certs
+users.users.nginx.extraGroups = [ "acme" ];
+```
+
+This defines a `kyren.codes` entry (which is what `useACMEHost` references)
+I am using cloudflare as my DNS provider, but you can get a full list of
+supported DNS providers at [this link](https://go-acme.github.io/lego/dns/), and
+of course make sure to change the environment variables to match your provider.
+
+Now if we commit and push these changes and wait about a minute for the server
+to pull the changes, we should have a working static site at `kyren.codes`.
+
+### Setting up continious deployment for the website
+
+The way we are going to do this on the server is create a new linux user and
+add to it a public ssh key that will be used for deployments.
+
+It's recommended that the user is restricted as much as possible so in the case
+of a hacker getting access to the key, they won't be able to get into other
+services that are running on the server.
+
+We can create a user declaratively like this
+
+```nix
+users.users.website = {
+  isNormalUser = true;
+  group = "users";
+  openssh.authorizedKeys.keys = [
+    # Allow an admin to manually SSH
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO7P9K9D5RkBk+JCRRS6AtHuTAc6cRpXfRfRMg/Kyren"
+
+    # The deployment public key
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ1B/i/AQLYt6mrz0P/oUJItpvWXp7z0xHNzmcPdtwWd"
+  ];
+};
+
+# Make sure the /srv/website always exists
+# Give read and write permissions to the website user
+# Give read permissions to the nginx group (so nginx can serve it)
+systemd.tmpfiles.rules = [
+  "d /srv/website 0750 website nginx"
+];
+```
+
+Now all you need to do is have a github action (or similar) that builds your
+website then copies the build output into the server by SSH-ing into it.
+You can take a look at [my github action](https://github.com/Kyren223/website/blob/master/.github/workflows/deploy.yml)
+for my website to see an example of how you can do it.
+
+## Conclusions
+
+NixOS helps system admins and developers achieve infrastructure as code by
+allowing them to declare the entire machine's configuration using the powerful
+Nix programming language.
+
+This makes the state of production machines more consistent and reliable while
+making it easy to reproduce across hundreds of machines.
+
+Compared with the traditional approach of a debian or ubuntu server, where
+system admins would have to painfully manage the state of all machines ensuring
+all the dependencies, firewalls, OS settings, etc are configured properly.
+
+Because of the difficulty, OCI containers such as docker became popular, but
+they come with a cost, mainly performane due to virtualization. NixOS makes it
+easy to configure programs to run on bare-metal making it a better, more
+performant alternative to docker.
+
+**Thanks for reading! wishing you a year full of code, growth and new oppurtunities!**
+
+If you'd like to learn more about NixOS, here are some resources I found useful:
+
+- [NixOS in production](https://github.com/Gabriella439/nixos-in-production)
+- [Vimjoyer's Youtube Channel](https://www.youtube.com/@vimjoyer/videos)
+
+Have questions or just want to chat? feel free to contact me on discord at
+Kyren223 or email me at Kyren223@proton.me.
+
+Also shoutout to Aubrey for inspiration for the website design, you can visit
+her site at [aubrey.rs](https://aubrey.rs/)
