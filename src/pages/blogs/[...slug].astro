@@ -41,7 +41,7 @@ const nextBlog = sortedBlogs[currentIndex - 1] || undefined;
                     previousBlog ? (
                         <TerminalBorder header="Previous Blog">
                             <span class="text-[var(--secondary)] truncate flex-1">
-                                <Link href={previousBlog.slug} newTab={false}>
+                                <Link href=`/blogs/${previousBlog.slug}` newTab={false}>
                                     vim ~/blogs/{previousBlog.slug}.md
                                 </Link>
                             </span>
@@ -55,7 +55,7 @@ const nextBlog = sortedBlogs[currentIndex - 1] || undefined;
                         <TerminalBorder header="Next Blog">
                             <div class="w-full  flex items-center">
                                 <span class="text-[var(--secondary)] truncate flex-1">
-                                    <Link href={nextBlog.slug} newTab={false}>
+                                    <Link href=`/blogs/${nextBlog.slug}` newTab={false}>
                                         vim ~/blogs/{nextBlog.slug}.md
                                     </Link>
                                 </span>
