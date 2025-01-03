@@ -17,7 +17,7 @@ const { title, description, href, cd = "cd ~/projects/" } = Astro.props;
         <span>
             <h1 class="inline-block text-[130%] text-[var(--accent)]">{title}</h1>
             <p class="inline-block text-[var(--secondary)]">{description}</p>
-            <span class="block my-2"><slot /></span>
+            <span class="block my-[0.625vw]"><slot /></span>
         </span>
     </TerminalBorder>
     <TerminalBorder header="Shell">
