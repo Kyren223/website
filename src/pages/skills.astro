@@ -24,25 +24,25 @@ const frameworks = ["Spigot API", "Bubbletea", "Astro"];
 ---
 
 <Terminal path="skills.md">
-    <div class="flex">
-        <div class="w-[60%] flex-column items-center">
+    <div class="sm:flex">
+        <div class="sm:w-[60%] flex-column items-center">
             <TerminalBorder header="Languages">
-                <div class="grid grid-cols-3 items-center gap-x-[0.625vw]">
+                <div class="grid grid-cols-3 items-center gap-x-[5vw] sm:gap-x-[0.625vw]">
                     {langs.map((lang) => <p>{lang}</p>)}
                 </div>
             </TerminalBorder>
-            <TerminalBorder header="Frameworks" extra="my-[2.25vw]">
-                <div class="grid grid-cols-1 items-center gap-x-[0.625vw]">
+            <TerminalBorder header="Frameworks" extra="my-[5vw] sm:my-[2.25vw]">
+                <div class="grid grid-cols-3 sm:grid-cols-1 items-center gap-x-[5vw] sm:gap-x-[0.625vw]">
                     {frameworks.map((framework) => <p>{framework}</p>)}
                 </div>
             </TerminalBorder>
             <TerminalBorder header="Tools">
-                <div class="grid grid-cols-1 items-center gap-x-[0.625vw]">
+                <div class="grid grid-cols-2 sm:grid-cols-1 items-center gap-x-[5vw] sm:gap-x-[0.625vw]">
                     {tools.map((tool) => <p>{tool}</p>)}
                 </div>
             </TerminalBorder>
         </div>
-        <div class="w-[40%] pl-[1.25vw]">
+        <div class="sm:w-[40%] pt-[5vw] sm:pt-0 sm:pl-[1.25vw]">
             <RadarChart max={max} data={data} />
         </div>
     </div>
