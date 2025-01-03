@@ -24,7 +24,7 @@ const nextBlog = sortedBlogs[currentIndex - 1] || undefined;
 ---
 
 <Terminal path="blogs/">
-    <div class="w-full h-[65vh] overflow-y-auto pr-4 border-box">
+    <div class="w-full h-[30vw] overflow-y-auto pr-[1.25vw] border-box">
         <div class="text-[130%] h-full">
             <div class="text-[110%]">
                 <BlogItem
@@ -36,7 +36,7 @@ const nextBlog = sortedBlogs[currentIndex - 1] || undefined;
             <div class="markdown">
                 <Content components={{ a: Link }} />
             </div>
-            <div class="px-[1px] py-2 grid grid-cols-2 gap-4">
+            <div class="px-[0.1vw] py-[0.625vw] grid grid-cols-2 gap-[1.25vw]">
                 {
                     previousBlog ? (
                         <TerminalBorder header="Previous Blog">
@@ -73,6 +73,7 @@ const nextBlog = sortedBlogs[currentIndex - 1] || undefined;
 <style is:global>
     .markdown {
         user-select: text;
+        font-size: 1.1rem;
     }
     .markdown a {
         display: inline-block;
@@ -81,19 +82,19 @@ const nextBlog = sortedBlogs[currentIndex - 1] || undefined;
     .markdown code {
         background: #333333;
         color: var(--accent);
-        padding: 0 0.5rem;
+        padding: 0 0.5em;
     }
     .markdown ul {
         list-style-type: square;
-        margin-left: 1rem;
-        margin-bottom: 1rem;
+        margin-left: 1em;
+        margin-bottom: 1em;
         font-size: 90%;
     }
     .markdown li {
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.5em;
     }
     .markdown p {
-        margin-bottom: 1rem;
+        margin-bottom: 1em;
         user-select: text;
     }
     .markdown strong {
@@ -102,14 +103,14 @@ const nextBlog = sortedBlogs[currentIndex - 1] || undefined;
     .markdown h2 {
         color: var(--secondary);
         font-size: 125%;
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.5em;
     }
     .markdown h3 {
         color: var(--secondary);
         font-size: 110%;
-        margin-bottom: 0.25rem;
+        margin-bottom: 0.25em;
     }
     .expressive-code {
-        margin-bottom: 1rem;
+        margin-bottom: 1em;
     }
 </style>
