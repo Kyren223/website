@@ -12,15 +12,18 @@ const blogs = (await getCollection("blogs"))
         date: blog.data.date,
         href: "/blogs/" + blog.slug,
     }));
+const repeatArray = (arr, times) => Array(times).fill(arr).flat();
+const repeated = repeatArray(blogs, 10);
+
 ---
 
 <Terminal path="blogs/">
-    <TerminalBorder header="Shell" extra="mt-[0.625vw] mb-[1.5625vw]">
+    <TerminalBorder header="Shell" extra="sm:mt-[0.625vw] sm:mb-[1.5625vw]">
         <p>$ ls -lah -t --color=auto ~/blogs</p>
     </TerminalBorder>
-    <div class="max-h-[24vw] overflow-y-auto">
+    <div class="sm:max-h-[24vw] overflow-y-auto">
         {
-            blogs.map((blog) => (
+            repeated.map((blog) => (
                 <>
                     <BlogItem
                         title={blog.title}

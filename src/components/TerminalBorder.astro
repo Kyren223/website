@@ -8,42 +8,36 @@ interface Props {
 const { header = "", footer = "", extra = "m-[-0.1vw]" } = Astro.props;
 ---
 
-<div class=`section ${extra}`>
-    <span class="tag-top">{header}</span>
-    <span class="tag-bottom">{footer}</span>
+<div
+    class=`section
+    p-[0.8em] pt-[1.0625em] border-[0.1vw] text-[3.5vw]
+    sm:p-[1vw] sm:pt-[1.0625vw] sm:border-[0.1vw] sm:text-[100%]
+    ${extra}`
+>
+    <span
+        class="tag px-[0.5em] text-[2.5vw] left-[0.5em] top-[-0.7em]
+        sm:px-[0.625vw] sm:text-[1vw] sm:left-[0.625vw] sm:top-[-0.75vw]"
+        >{header}</span
+    >
+    <span
+        class="tag px-[0.5em] text-[2.5vw] left-[0.5em] bottom-[-0.7em]
+        sm:px-[0.625vw] sm:text-[1vw] sm:left-[0.625vw] sm:bottom-[-0.75vw]"
+        >{footer}</span
+    >
     <slot />
 </div>
 
 <style>
     .section {
         position: relative;
-        padding: 1vw;
-        padding-top: 1.0625vw;
         display: flex;
         border-style: solid;
-        border-width: 0.1vw;
         border-color: var(--alt);
     }
 
-    .tag-top {
+    .tag {
         position: absolute;
-        top: -0.75vw;
-        left: 0.625vw;
         background-color: var(--background);
-        padding-right: 0.625vw;
-        padding-left: 0.625vw;
-        font-size: 1vw;
-        color: var(--alt);
-    }
-
-    .tag-bottom {
-        position: absolute;
-        bottom: -0.75vw;
-        left: 0.625vw;
-        background-color: var(--background);
-        padding-right: 0.625vw;
-        padding-left: 0.625vw;
-        font-size: 1vw;
         color: var(--alt);
     }
 </style>
