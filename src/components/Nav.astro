@@ -8,9 +8,23 @@ const { path } = Astro.props;
 const directories = ["skills", "projects", "blogs"];
 ---
 
-<nav>
-    <span id="nav-path">/home/kyren/{path}</span>
-    <span id="nav-links">
+<nav
+    class="grid sm:flex
+    justify-between
+    border-[0.25vh] sm:border-[0.125vw]
+    border-[var(--alt)]
+    border-solid
+    mb-[7vw] sm:mb-[1.5625vw]
+    p-[3vw] sm:p-[1vw]"
+>
+    <span class="mr-[2.5vh] text-[5vw] sm:mr-[2.5vw] sm:text-[1.375vw]"
+        >/home/kyren/{path}</span
+    >
+    <span
+        id="nav-links"
+        class="mb-0 mx-[0.2vw] text-[5vw]
+        mx-[0.2vw] sm:text-[1.375vw]"
+    >
         <a href="/">home</a>
         {
             directories.map((dir) => (
@@ -23,26 +37,10 @@ const directories = ["skills", "projects", "blogs"];
 </nav>
 
 <style>
-    nav {
-        display: flex;
-        justify-content: space-between;
-        border: 0.125vw var(--alt);
-        border-style: solid;
-        margin-bottom: 1.5625vw;
-        padding: 0.9375vw;
-    }
     #nav-links a {
-        margin-bottom: 0;
-        margin-right: 0.1875vw;
-        margin-left: 0.1875vw;
-        font-size: 1.375vw;
         color: var(--primary);
     }
     #nav-links a:hover {
         color: var(--accent);
-    }
-    #nav-path {
-        margin-right: 2.5vw;
-        font-size: 1.375vw;
     }
 </style>

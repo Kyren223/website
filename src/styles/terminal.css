@@ -27,26 +27,6 @@ body {
   zoom: 1;
 }
 
-main {
-  display: block;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  grid-template-columns: minmax(200px, 1fr);
-  transform: translate(-50%, -50%);
-  border: 0.2vw;
-  border-style: solid;
-  background: var(--background);
-  padding: 2.2vw;
-  width: 68.75vw;
-  height: 35vw;
-  max-width: 75%;
-  max-height: 80%;
-  overflow: hidden;
-  font-size: 1.125vw;
-  font-weight: 300;
-}
-
 h1,
 h2,
 h3 {

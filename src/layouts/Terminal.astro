@@ -14,9 +14,28 @@ const { path: title } = Astro.props;
 <html lang="en">
     <Head title=`/home/kyren/${title}` description="My personal website" />
     <body>
-        <main>
+        <main class="
+            w-[95vw] h-[97svh] p-[2.2svh] text-[1.125vh] 
+            sm:w-[68.75vw] sm:h-[35vw] sm:p-[2.2vw] sm:text-[1.125vw] sm:border-[0.2vw] sm:border-solid
+            ">
             <Nav path={title} />
             <slot />
         </main>
     </body>
 </html>
+<style>
+    main {
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: var(--background);
+        font-weight: 300;
+        overflow: hidden;
+
+        /* grid-template-columns: minmax(200px, 1fr); */
+        /* max-width: 75%; */
+        /* max-height: 80%; */
+    }
+</style>
