@@ -15,10 +15,10 @@ const blogs = (await getCollection("blogs"))
 ---
 
 <Terminal path="blogs/">
-    <TerminalBorder header="Shell" margin="0.5rem 0 20px">
+    <TerminalBorder header="Shell" margin="0.625vw 0 1.5625vw">
         <p>$ ls -lah -t --color=auto ~/blogs</p>
     </TerminalBorder>
-    <div class="max-h-[18.5rem] overflow-y-auto">
+    <div class="max-h-[24vw] overflow-y-auto">
         {
             blogs.map((blog) => (
                 <>
