@@ -12,12 +12,12 @@ interface Props {
 const { title, description, href, cd = "cd ~/projects/" } = Astro.props;
 ---
 
-<div class="flex-column">
+<div class="flex-column mt-[1vw] mx-[1vw] mb-[5vw] sm:m-0">
     <TerminalBorder>
         <span>
             <h1 class="inline-block text-[130%] text-[var(--accent)]">{title}</h1>
             <p class="inline-block text-[var(--secondary)]">{description}</p>
-            <span class="block my-[0.625vw]"><slot /></span>
+            <span class="block my-[3vw] sm:my-[0.625vw]"><slot /></span>
         </span>
     </TerminalBorder>
     <TerminalBorder header="Shell">

@@ -4,29 +4,29 @@ import Project from "@components/Project.astro";
 ---
 
 <Terminal path="projects/">
-    <div class="w-full max-w-full">
-        <div class="grid gap-[1.25vw] grid-cols-[2fr_1fr]">
-            <div class="">
-                <Project
-                    title="Kapi"
-                    description="Minecraft Plugins Framework"
-                    href="https://github.com/KapiMC/Kapi"
-                >
-                    A complete "batteries included" framework streamlining the
-                    process of Minecraft plugin development. Enabling developers
-                    to make impressive plugins with ease!
-                </Project>
-            </div>
-            <div>
-                <Project
-                    title="???"
-                    description="???????"
-                    href="https://github.com/KapiMC/Kapi"
-                >
-                    ????????? ???? ??????? ????? ???????? ??????
-                </Project>
-            </div>
-            <div class="col-span-2 grid grid-cols-[1fr_1fr_1fr] gap-[1.25vw]">
+    <div
+        class="w-full max-h-[80svh] overflow-auto sm:overflow-visible"
+    >
+        <div class="sm:grid sm:gap-[1.25vw] sm:grid-cols-[2fr_1fr]">
+            <Project
+                title="Kapi"
+                description="Minecraft Plugins Framework"
+                href="https://github.com/KapiMC/Kapi"
+            >
+                A complete "batteries included" framework streamlining the
+                process of Minecraft plugin development. Enabling developers to
+                make impressive plugins with ease!
+            </Project>
+            <Project
+                title="???"
+                description="???????"
+                href="https://github.com/KapiMC/Kapi"
+            >
+                ????????? ???? ??????? ????? ???????? ??????
+            </Project>
+            <div
+                class="sm:col-span-2 sm:grid sm:grid-cols-[1fr_1fr_1fr] sm:gap-[1.25vw]"
+            >
                 <Project
                     title="Trident"
                     description="IntelliJ Plugin"
