@@ -13,7 +13,13 @@ const data = [
 ];
 
 const langs = ["Java", "C/C++", "Golang", "Kotlin", "Rust", "Lua"];
-const tools = ["Git & GitHub", "Sqlite3", "Neovim and IntelliJ", "Linux", "NixOS"];
+const tools = [
+    "Git & GitHub",
+    "Sqlite3",
+    "Neovim and IntelliJ",
+    "Linux",
+    "NixOS",
+];
 const frameworks = ["Spigot API", "Bubbletea", "Astro"];
 ---
 
@@ -25,7 +31,7 @@ const frameworks = ["Spigot API", "Bubbletea", "Astro"];
                     {langs.map((lang) => <p>{lang}</p>)}
                 </div>
             </TerminalBorder>
-            <TerminalBorder header="Frameworks" margin="2.25vw 0">
+            <TerminalBorder header="Frameworks" extra="my-[2.25vw]">
                 <div class="grid grid-cols-1 items-center gap-x-[0.625vw]">
                     {frameworks.map((framework) => <p>{framework}</p>)}
                 </div>

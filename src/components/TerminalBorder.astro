@@ -2,13 +2,13 @@
 interface Props {
     header?: string;
     footer?: string;
-    margin?: string;
+    extra?: string;
 }
 
-const { header = "", footer = "", margin = "-0.1vw" } = Astro.props;
+const { header = "", footer = "", extra = "m-[-0.1vw]" } = Astro.props;
 ---
 
-<div class="section" style={`margin: ${margin};`}>
+<div class=`section ${extra}`>
     <span class="tag-top">{header}</span>
     <span class="tag-bottom">{footer}</span>
     <slot />

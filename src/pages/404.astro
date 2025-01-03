@@ -1,14 +1,17 @@
 ---
-import TerminalBorder from "@components/TerminalBorder.astro"
-import Terminal from "@layouts/Terminal.astro"
+import TerminalBorder from "@components/TerminalBorder.astro";
+import Terminal from "@layouts/Terminal.astro";
 
 const url = new URL(Astro.request.url).pathname.substring(1);
 ---
+
 <Terminal path="404">
-    <TerminalBorder header="Shell" margin="0.5rem 0">
+    <TerminalBorder header="Shell" extra="my-[0.625vw]">
         <span>
             <p id="cd">$ cd ~/{url}</p>
-            <p id="err" class="pt-3">"{url}": No such file or directory (os error 2)</p>
+            <p id="err" class="pt-[1vw]">
+                "{url}": No such file or directory (os error 2)
+            </p>
         </span>
     </TerminalBorder>
 </Terminal>
@@ -16,6 +19,7 @@ const url = new URL(Astro.request.url).pathname.substring(1);
     document.addEventListener("DOMContentLoaded", () => {
         const url = window.location.pathname.substring(1);
         document.getElementById("cd")!.textContent = `$ cd ~/${url}`;
-        document.getElementById("err")!.textContent = `"${url}": No such file or directory (os error 2)`;
+        document.getElementById("err")!.textContent =
+            `"${url}": No such file or directory (os error 2)`;
     });
 </script>

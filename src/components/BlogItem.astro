@@ -19,7 +19,7 @@ interface Props {
 const { title, description, date, href, header } = Astro.props;
 ---
 
-<TerminalBorder header={header} footer={formatDate(date)} margin="0 0 2vw;">
+<TerminalBorder header={header} footer={formatDate(date)} extra="mb-[2vw]">
     <span class="cursor-pointer group block w-full">
         {
             href ? (
