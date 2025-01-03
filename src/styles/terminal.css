@@ -34,12 +34,9 @@ main {
   left: 50%;
   grid-template-columns: minmax(200px, 1fr);
   transform: translate(-50%, -50%);
-  border: 1px;
+  border: 0.2vw;
   border-style: solid;
   background: var(--background);
-  /* padding: 1.75rem; */
-  /* width: 55rem; */
-  /* height: 28rem; */
   padding: 2.2svw;
   width: 68.75svw;
   height: 35svw;
@@ -47,7 +44,6 @@ main {
   max-height: 80%;
   overflow: hidden;
   font-size: 1.125svw;
-  /* font-size: 0.9rem; */
   font-weight: 300;
 }
 
