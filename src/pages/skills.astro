@@ -21,22 +21,22 @@ const frameworks = ["Spigot API", "Bubbletea", "Astro"];
     <div class="flex">
         <div class="w-[60%] flex-column items-center">
             <TerminalBorder header="Languages">
-                <div class="grid md:grid-cols-3 items-center gap-x-8">
+                <div class="grid grid-cols-3 items-center gap-x-[0.625vw]">
                     {langs.map((lang) => <p>{lang}</p>)}
                 </div>
             </TerminalBorder>
-            <TerminalBorder header="Frameworks" margin="30px 0">
-                <div class="grid md:grid-cols-1 items-center gap-x-8">
+            <TerminalBorder header="Frameworks" margin="2.25vw 0">
+                <div class="grid grid-cols-1 items-center gap-x-[0.625vw]">
                     {frameworks.map((framework) => <p>{framework}</p>)}
                 </div>
             </TerminalBorder>
             <TerminalBorder header="Tools">
-                <div class="grid md:grid-cols-1 items-center gap-x-8">
+                <div class="grid grid-cols-1 items-center gap-x-[0.625vw]">
                     {tools.map((tool) => <p>{tool}</p>)}
                 </div>
             </TerminalBorder>
         </div>
-        <div class="w-[40%] pl-4">
+        <div class="w-[40%] pl-[1.25vw]">
             <RadarChart max={max} data={data} />
         </div>
     </div>
