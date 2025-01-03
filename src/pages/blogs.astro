@@ -12,8 +12,6 @@ const blogs = (await getCollection("blogs"))
         date: blog.data.date,
         href: "/blogs/" + blog.slug,
     }));
-const repeatArray = (arr, times) => Array(times).fill(arr).flat();
-const repeated = repeatArray(blogs, 10);
 ---
 
 <Terminal path="blogs/">
@@ -25,7 +23,7 @@ const repeated = repeatArray(blogs, 10);
     </TerminalBorder>
     <div class="max-h-[80svh] sm:max-h-[24vw] overflow-y-auto">
         {
-            repeated.map((blog) => (
+            blogs.map((blog) => (
                 <>
                     <BlogItem
                         title={blog.title}
