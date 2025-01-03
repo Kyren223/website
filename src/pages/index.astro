@@ -33,8 +33,11 @@ watching Anime or solving Rubik's cubes fast.`.trimStart();
 ---
 
 <Terminal path="">
-    <div id="content">
-        <div id="left" class="column">
+    <!-- ================= -->
+    <!-- ==== Desktop ==== -->
+    <!-- ================= -->
+    <div id="content" class="w-0 h-0 invisible sm:w-full sm:h-full sm:visible">
+        <div class="w-[30%]">
             <TerminalBorder header="Profile">
                 <div class="flex items-center space-x-[1.25vw] h-[9.5vw]">
                     <img
@@ -82,9 +85,7 @@ watching Anime or solving Rubik's cubes fast.`.trimStart();
             </TerminalBorder>
             <div class="w-[334%]">
                 <TerminalBorder header="SSH Key">
-                    <div
-                        class="sshKeyCopy w-[100%] flex items-center group"
-                    >
+                    <div class="sshKeyCopy w-[100%] flex items-center group">
                         <span
                             id="sshKey"
                             class="hover:text-[var(--alt)] cursor-pointer truncate flex-1 group-hover:text-[var(--alt)]"
@@ -109,7 +110,7 @@ watching Anime or solving Rubik's cubes fast.`.trimStart();
                 </TerminalBorder>
             </div>
         </div>
-        <div id="right" class="column">
+        <div class="w-[67%]">
             <TerminalBorder header="Status">
                 <p>
                     Working on <Link href="https://github.com/KapiMC/Kapi"
@@ -127,6 +128,76 @@ watching Anime or solving Rubik's cubes fast.`.trimStart();
                 date={latestBlog.data.date}
                 href={"/blogs/" + latestBlog.slug}
             />
+        </div>
+    </div>
+
+    <!-- ================ -->
+    <!-- ==== Mobile ==== -->
+    <!-- ================ -->
+    <div
+        class="w-full h-[80svh] visible sm:w-0 sm:h-0 sm:invisible overflow-y-auto overflow-x-hidden sm:overflow-visible"
+    >
+        <div class="mx-[1vw] mt-[1vw]">
+            <TerminalBorder header="Status">
+                <p>
+                    Working on <Link href="https://github.com/KapiMC/Kapi"
+                        >Kapi
+                    </Link> | Available for hire | Learning Golang & Backend
+                </p>
+            </TerminalBorder>
+            <TerminalBorder header="About Me" extra="my-[5vw] sm:my-[2.5vw]">
+                <p>{aboutMe}</p>
+            </TerminalBorder>
+            <BlogItem
+                header="Latest Blog Post"
+                title={latestBlog.data.title}
+                description={latestBlog.data.description ?? ""}
+                date={latestBlog.data.date}
+                href={"/blogs/" + latestBlog.slug}
+            />
+            <div class="mt-[8vw]">
+                <TerminalBorder header="Email">
+                    <span id="email" class="flex-1">Kyren223@proton.me</span>
+                    <button class="emailCopy hover:text-gray-700">
+                        <svg
+                            class="ml-[-4vw]"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                        >
+                            <path
+                                fill="currentColor"
+                                fill-rule="evenodd"
+                                d="M4 2a2 2 0 00-2 2v9a2 2 0 002 2h2v2a2 2 0 002 2h9a2 2 0 002-2V8a2 2 0 00-2-2h-2V4a2 2 0 00-2-2H4zm9 4V4H4v9h2V8a2 2 0 012-2h5zM8 8h9v9H8V8z"
+                            ></path>
+                        </svg>
+                    </button>
+                </TerminalBorder>
+            </div>
+            <TerminalBorder header="GitHub">
+                <Link href="https://github.com/Kyren223">
+                    github.com/Kyren223
+                </Link>
+            </TerminalBorder>
+            <TerminalBorder header="Discord">
+                <Link href="https://discord.com/users/481884415090229258">
+                    Kyren223
+                </Link>
+            </TerminalBorder>
+            <TerminalBorder header="Timezone">
+                <div class="flex justify-between w-full">
+                    <span class="text-left">UTC+2</span>
+                    <span id="time" class="text-right">Loading...</span>
+                </div>
+            </TerminalBorder>
+            <TerminalBorder header="SSH Key">
+                <div class="sshKeyCopy w-[100%] flex items-center group">
+                    <span
+                        id="sshKey"
+                        class="hover:text-[var(--alt)] cursor-pointer truncate flex-1 group-hover:text-[var(--alt)]"
+                        >{sshKey}</span
+                    >
+                </div>
+            </TerminalBorder>
         </div>
     </div>
 </Terminal>
@@ -179,18 +250,6 @@ watching Anime or solving Rubik's cubes fast.`.trimStart();
         margin-top: 1.5vw;
         display: flex;
         justify-content: space-between;
-    }
-
-    #left {
-        width: 30%;
-    }
-    #right {
-        width: 67%;
-    }
-
-    .column {
-        /* border-width: 10px; */
-        /* border-color: var(--alt); */
     }
 
     button {
