@@ -29,7 +29,7 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           ARGS: "-avz --delete"
           SOURCE: "dist/"
-          REMOTE_HOST: 185.170.113.195
+          REMOTE_HOST: kyren.codes
           REMOTE_USER: website
           TARGET: "/srv/website"
           SCRIPT_BEFORE: |
