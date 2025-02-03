@@ -1,0 +1,112 @@
+---
+import Terminal from "@layouts/Terminal.astro";
+import TerminalBorder from "@components/TerminalBorder.astro";
+---
+
+<Terminal path="/bin/bash">
+    <TerminalBorder header="Bash" extra="h-[62%] mt-[0.625vw] mb-[1.5625vw]">
+        <div class="flex flex-col">
+            <p>$ ls -lah -t --color=auto ~/blogs</p>
+            <p>"/home/kyren/blogs": No such file or directory (os error 2)</p>
+            <p>&nbsp;</p>
+            <p>ls -lah -t --color=auto ~/blogs</p>
+            <p>ls -lah -t --color=auto ~/blogs</p>
+        </div>
+    </TerminalBorder>
+    <TerminalBorder header="Shell" extra="font-['JetBrains_Mono'] w-full">
+        <span class="pr-2">$</span>
+        <p id="terminal" contenteditable="true" spellcheck="false">
+            npm run buil<span>d</span>after
+        </p>
+        <input class="absolute opacity-0 w-0 h-0 p-0 m-0" autofocus />
+    </TerminalBorder>
+</Terminal>
+<script>
+    var prevCursor = -1;
+    var prevSelectionEnd = -1;
+    var swapped = false;
+    function getCursorText(inputElement) {
+        const text = inputElement.value;
+
+        const oCursorPos = inputElement.selectionStart;
+        const oSelectionEnd = inputElement.selectionEnd;
+
+        var cursorPos = oCursorPos;
+        var selectionEnd = oSelectionEnd;
+
+        if (
+            prevCursor != -1 &&
+            oCursorPos != oSelectionEnd &&
+            (prevSelectionEnd != oSelectionEnd ||
+                (prevSelectionEnd == oSelectionEnd &&
+                    prevCursor == oCursorPos &&
+                    swapped))
+        ) {
+            cursorPos = oSelectionEnd;
+            selectionEnd = oCursorPos;
+            prevSelectionEnd = oSelectionEnd;
+            swapped = true;
+        } else {
+            swapped = false;
+        }
+
+        prevCursor = oCursorPos;
+
+        var beforeCursor = text.substring(0, cursorPos);
+        var afterCursor = text.substring(cursorPos + 1);
+        var cursorChar = text[cursorPos] || "&nbsp;";
+        var selectedText = "";
+
+        if (selectionEnd > cursorPos) {
+            selectedText = text.substring(cursorPos + 1, selectionEnd);
+            afterCursor = text.substring(oSelectionEnd);
+            beforeCursor = text.substring(0, cursorPos);
+        } else if (selectionEnd < cursorPos) {
+            cursorChar = text[cursorPos - 1] || "&nbsp;";
+            selectedText = text.substring(selectionEnd, cursorPos - 1);
+            afterCursor = text.substring(cursorPos);
+            beforeCursor = text.substring(0, oCursorPos);
+        }
+
+        return {
+            beforeCursor,
+            afterCursor,
+            cursorChar,
+            selectedText,
+            swapped,
+        };
+    }
+
+    const terminal = document.getElementById("terminal")!!;
+    const input = document.querySelector("input")!!;
+    const cursorStyle =
+        "background-color: var(--text); color: var(--background);";
+    const visualStyle = "background-color: var(--primary); color: var(--background);";
+
+    function updateShell() {
+        var { beforeCursor, afterCursor, cursorChar, selectedText, swapped } =
+            getCursorText(input);
+
+        input.focus();
+
+        const cursor = `<span style="${cursorStyle}">${cursorChar}</span>`;
+        const visual = `<span style="${visualStyle}">${selectedText}</span>`;
+
+        if (swapped) {
+            terminal.innerHTML = `${beforeCursor}${visual}${cursor}${afterCursor}`;
+        } else {
+            terminal.innerHTML = `${beforeCursor}${cursor}${visual}${afterCursor}`;
+        }
+    }
+
+    input.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            // const inputText = input.value;
+            input.value = "";
+            updateShell();
+        }
+    });
+
+    setInterval(updateShell, 50);
+</script>
