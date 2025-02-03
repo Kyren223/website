@@ -5,17 +5,11 @@ import TerminalBorder from "@components/TerminalBorder.astro";
 
 <Terminal path="/bin/bash">
     <TerminalBorder header="Bash" extra="h-[62%] mt-[0.625vw] mb-[1.5625vw]">
-        <div class="flex flex-col">
-            <p>$ ls -lah -t --color=auto ~/blogs</p>
-            <p>"/home/kyren/blogs": No such file or directory (os error 2)</p>
-            <p>&nbsp;</p>
-            <p>ls -lah -t --color=auto ~/blogs</p>
-            <p>ls -lah -t --color=auto ~/blogs</p>
-        </div>
+        <div id="output" class="flex flex-col"></div>
     </TerminalBorder>
-    <TerminalBorder header="Shell" extra="font-['JetBrains_Mono'] w-full">
-        <span class="pr-2">$</span>
-        <p id="terminal" contenteditable="true" spellcheck="false">
+    <TerminalBorder header="Shell" extra="font-['JetBrains_Mono']">
+        <pre>$ </pre>
+        <p id="input" contenteditable="true" spellcheck="false">
             npm run buil<span>d</span>after
         </p>
         <input class="absolute opacity-0 w-0 h-0 p-0 m-0" autofocus />
@@ -77,11 +71,13 @@ import TerminalBorder from "@components/TerminalBorder.astro";
         };
     }
 
-    const terminal = document.getElementById("terminal")!!;
+    const output = document.getElementById("output")!!;
+    const fakeInput = document.getElementById("input")!!;
     const input = document.querySelector("input")!!;
     const cursorStyle =
         "background-color: var(--text); color: var(--background);";
-    const visualStyle = "background-color: var(--primary); color: var(--background);";
+    const visualStyle =
+        "background-color: var(--primary); color: var(--background);";
 
     function updateShell() {
         var { beforeCursor, afterCursor, cursorChar, selectedText, swapped } =
@@ -93,16 +89,76 @@ import TerminalBorder from "@components/TerminalBorder.astro";
         const visual = `<span style="${visualStyle}">${selectedText}</span>`;
 
         if (swapped) {
-            terminal.innerHTML = `${beforeCursor}${visual}${cursor}${afterCursor}`;
+            fakeInput.innerHTML = `${beforeCursor}${visual}${cursor}${afterCursor}`;
         } else {
-            terminal.innerHTML = `${beforeCursor}${cursor}${visual}${afterCursor}`;
+            fakeInput.innerHTML = `${beforeCursor}${cursor}${visual}${afterCursor}`;
         }
+
+        if (input.value.length >= 97) {
+            input.value = "";
+            updateShell();
+            write("segmentation fault (core dumped)");
+            updateTerminal();
+        }
+    }
+
+    var maxLines = 15;
+    var terminal: string[] = ["Coming soon!"];
+
+    function write(line: string) {
+        const maxChars = 98;
+
+        while (line.length > maxChars) {
+            terminal.push(line.slice(0, maxChars));
+            line = line.slice(maxChars);
+        }
+
+        terminal.push(line);
+
+        while (terminal.length > maxLines) {
+            terminal.shift();
+        }
+    }
+
+    function updateTerminal() {
+        var text = "";
+        for (let i = 0; i < terminal.length; i++) {
+            text += `<p>${terminal[i] == "" ? "&nbsp;" : terminal[i]}</p>`;
+        }
+
+        output.innerHTML = text;
+    }
+
+    function runCommand(cmd: string) {
+        write(`$ ${cmd}`);
+        console.log(`$ ${cmd}`);
+        console.log(terminal);
+        switch (cmd) {
+            case "":
+                break;
+            case "clear":
+                terminal = [];
+                break;
+            case "test":
+                write('testing "trying to get more info"...');
+                write('test "trying to get more info" failed');
+                write("executed 1 test, 0 succeeded, 1 failed");
+                break;
+            case "thing":
+                break;
+            case "thing":
+                break;
+            default:
+                write(`${cmd}: command not found`);
+                break;
+        }
+        updateTerminal();
     }
 
     input.addEventListener("keydown", function (event) {
         if (event.key === "Enter") {
             event.preventDefault();
-            // const inputText = input.value;
+            runCommand(input.value);
             input.value = "";
             updateShell();
         }
