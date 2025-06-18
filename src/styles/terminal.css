@@ -1,5 +1,13 @@
 @import url("@styles/fonts/JetBrainsMono.css");
 
+@font-face {
+  font-family: 'Monocraft';
+  src: url('/fonts/Monocraft.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --primary: #54d7a9;
   --secondary: #9b7eca;
@@ -8,6 +16,7 @@
   --text: #ffffff;
   --alt: #999999;
   --background: #000000;
+  --font: "Jetbrains Mono", monospace;
 }
 
 * {
@@ -18,7 +27,7 @@
 html {
   background-color: var(--background);
   color: var(--text);
-  font-family: "Jetbrains Mono", monospace;
+  font-family: var(--font);
   user-select: none;
 }
 
