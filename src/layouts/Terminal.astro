@@ -34,3 +34,34 @@ const { path: title } = Astro.props;
         font-weight: 300;
     }
 </style>
+<script>
+    function setTheme(theme) {
+        const root = document.documentElement;
+
+        // Get current values from root
+        const computed = getComputedStyle(root);
+        const existingTheme = {};
+
+        const themeKeys = ["primary", "secondary", "accent", "extra", "text", "alt", "background", "font"];
+
+        themeKeys.forEach(key => {
+            existingTheme[key] = theme[key] ?? computed.getPropertyValue(`--${key}`).trim();
+            root.style.setProperty(`--${key}`, existingTheme[key]);
+        });
+
+        localStorage.setItem("theme", JSON.stringify(existingTheme));
+    }
+
+    function loadTheme() {
+        const savedTheme = localStorage.getItem("theme");
+        if (savedTheme) {
+            setTheme(JSON.parse(savedTheme));
+        }
+    }
+
+    // Attach to window so it's accessible globally
+    window.setTheme = setTheme;
+
+    // Load theme on page load
+    loadTheme();
+</script>
