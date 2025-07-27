@@ -1,0 +1,78 @@
+---
+title: "Making a game in 3 days"
+description: How we built a game in zig for the boot.dev hackathon
+date: 2025-07-28
+---
+
+This blog post is about my experience participating in the boot.dev 2025 hackathon.
+
+## The team
+
+- Kyren223 (me) - contact me through discord
+- GottZ - contact https://contact.gottz.de/
+- Nuclear Pasta - contact TODO
+
+## The idea
+
+Initially we wanted to make a programming language REPL, but a REPL is not very
+visual, and we also realized that maybe making an entire language in 3 days
+isn't very realistic, so instead we decided to go for an even more difficult
+idea, making an entire game, in 3 days...
+
+## CPU vs AI
+
+We knew we wanted to make something coding-related, we thought about including
+a programming language in the game, and that led us to an idea about CPU instructions.
+This idea evolved into a tower defense game, where the CPUs are towers defending
+against pesky bugs like null pointer dereferences and infinite loops.
+
+For the language, we chose Zig, for the following reasons:
+
+- Me and nuc are already familiar with it (and really like it)
+- Total control over memory (manual memory management)
+- Blazingly fast
+- Great interopability with C (for GottZ)
+- Simple and C-like
+- Modern (optionals, tagged unions, functions on structs, etc)
+
+For the game library, we decided to go with [raylib-zig](https://github.com/Not-Nik/raylib-zig),
+the [raylib](https://github.com/raysan5/raylib) bindings for Zig.
+
+We did so because raylib is an extremely simple to use bare bones library
+to handle things usch as player input and graphics.
+
+## Difficulties
+
+To avoid git conflicts on a fresh project, we decided to use [Zed](https://zed.dev/)'s collaborative features
+to write code as if it was a google doc.
+
+This worked for a while but the Zig LSP didn't work well and it was really hard
+to test when only 1 person can build the project.
+
+Because of this on the 2nd day once we had more "surface area" we decided to
+go back into commit-push and pull workflow so each of us can use our favorite
+editor and run the project locally.
+
+By the end of the 2nd day the project was mostly complete, we spent the rest of
+the day adding polish like fancy game over and victory screens, statistics,
+making the readme, fixing bugs etc.
+
+## Finally
+
+After 3 days of hard non-stop coding, we actually got a working game.
+It consists of 3 levels and even with very basic mechanics it's already fun!
+
+> Nuclear Pasta
+> I feel like I'm playing Bloons
+
+So what are you waiting for? go give the game a try!
+
+[https://github.com/The-Memory-Managers/cpu-vs-ai](https://github.com/The-Memory-Managers/cpu-vs-ai)
+
+Don't forget to star the repo!
+
+Not in the mood to play? watch a demo playthrough [here](https://youtu.be/_clLDGNlef0).
+
+This is just a prototype, we plan on (eventually TM) making a full game out of it, so stay tuned!
+
+As always if you have questions or want to chat, feel free to contact me on discord at Kyren223 or email me at Kyren223@proton.me.
