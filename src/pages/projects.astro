@@ -7,7 +7,16 @@ import Project from "@components/Project.astro";
     <div
         class="w-full max-h-[80svh] overflow-auto sm:overflow-visible"
     >
-        <div class="sm:grid sm:gap-[1.25vw] sm:grid-cols-[2fr_1fr]">
+        <div class="sm:grid sm:gap-[1.25vw] sm:grid-cols-[2fr_3fr]">
+            <Project
+                title="CPU vs AI"
+                description="Game (made with Zig)"
+                href="https://github.com/The-Memory-Managers/cpu-vs-ai"
+            >
+                A tower defense game where an AI chip on your motherboard
+                generates bugs! Place CPUs to destroy the bugs!
+                Don't let them corrupt your RAM!
+            </Project>
             <Project
                 title="Kapi"
                 description="Minecraft Plugins Framework"
@@ -16,13 +25,6 @@ import Project from "@components/Project.astro";
                 A complete "batteries included" framework streamlining the
                 process of Minecraft plugin development. Enabling developers to
                 make impressive plugins with ease!
-            </Project>
-            <Project
-                title="???"
-                description="???????"
-                href="https://github.com/KapiMC/Kapi"
-            >
-                ????????? ???? ??????? ????? ???????? ??????
             </Project>
             <div
                 class="sm:col-span-2 sm:grid sm:grid-cols-[1fr_1fr_1fr] sm:gap-[1.25vw]"
