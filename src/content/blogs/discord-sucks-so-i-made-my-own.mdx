@@ -1,0 +1,67 @@
+---
+title: "Discord sucks! ...so I made my own"
+description: How I built Eko - THE discord alternative for terminal nerds
+date: 2025-08-08
+---
+
+## Discord sucks
+
+I have been disatisfied with discord for a few years by now, the main reasons that most people will
+agree with me, are it's slow, sluggish, bloated, and that it gets worse over time.
+
+- Reduced upload size from 50mb to 10mb
+- Ugly UI revamps
+- Literally ships with an entire browser (chromium due to electron)
+
+But there are a few more personal reasons for me.
+
+Ignoring the fact that I am in 100 servers and literally can't join any more,
+as someone who spends most of his day in the terminal, writing code with NVIM (btw),
+I really missed vim motions in discord, they are great and I'd probably talk about them in the future.
+
+## Searching for alternatives
+
+Vim motions are so ubiquitous they are practically everywhere, not just coding editors like Zed and
+vsc\*de but also note taking apps like Obsidian, and heck, even google docs have an extension for them.
+
+Surely an app as popular as Discord will have them right? well after some searching I found
+[Cordless](https://github.com/Bios-Marcel/cordless), a discord client in the terminal, great!
+
+Reading the readme, I immediately got dissapointed, the project has been shutdown.
+The reason was due to a high risk of Discord banning users for ToS violation, so I couldn't even make my own client!
+
+## The idea
+
+So I thought to myself, if Discord doesn't let me make a client, I'll write my own Discord, complete
+with a backend, frontend and most importantly, vim motions!
+
+Great, now that I have the idea, what languages do I use for the backend and the frontend?
+
+I heard that golang is a really good language for the backend, due to it's concurrency model making
+it easy to handle a ton of connections simultaneously.
+
+And what about the frontend? I'd need to find some library to help me make a TUI (terminal UI),
+After some searching, I found [bubbletea](https://github.com/charmbracelet/bubbletea) from [charm](https://github.com/charmbracelet),
+a golang library for creating TUIs, perfect.
+
+This has the added benefit of the backend and frontend being able to share types as they are
+written in the same language.
+
+## The release
+
+After months of work, I am happy to present...
+
+[Eko](https://github.com/kyren223/eko) - a terminal-native discord alternative for terminal enthusiasts!
+
+<img src="/eko-screenshot.png" alt="Description" style={{ width: '1000px', paddingBottom: '20px' }} />
+
+For more information head over to the [README](https://github.com/kyren223/eko), or install it now with
+```
+curl -sS https://eko.kyren.codes/install.sh | sh
+```
+
+Hope to see you there!
+
+As always if you have questions or want to chat, feel free to contact me on discord at Kyren223 or email me at Kyren223@proton.me.
+
+You can also add me on Eko, here's my ID: `2102554263552`
