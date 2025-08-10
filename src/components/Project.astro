@@ -7,9 +7,10 @@ interface Props {
     description: string;
     href: string;
     cd?: string;
+    dir?: string;
 }
 
-const { title, description, href, cd = "cd ~/projects/" } = Astro.props;
+const { title, description, href, cd = title, dir = "cd ~/projects/" } = Astro.props;
 ---
 
 <div class="flex-column mt-[1vw] mx-[1vw] mb-[5vw] sm:m-0">
@@ -21,6 +22,6 @@ const { title, description, href, cd = "cd ~/projects/" } = Astro.props;
         </span>
     </TerminalBorder>
     <TerminalBorder header="Shell">
-        <Link href={href}>{cd}{title}</Link>
+        <Link href={href}>{dir}{cd}</Link>
     </TerminalBorder>
 </div>
