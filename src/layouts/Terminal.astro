@@ -7,6 +7,8 @@ interface Props {
     path: string;
 }
 
+// sm:w-[68.75vw] sm:h-[38vw] sm:p-[2.2vw] sm:text-[1.125vw] sm:border-[0.2vw] sm:border-solid" -->
+
 const { path: title } = Astro.props;
 ---
 
@@ -15,7 +17,7 @@ const { path: title } = Astro.props;
     <Head title=`${title}` description="My personal website" />
     <body>
         <main
-            class="w-[95vw] h-[97vh] p-[2.2svh] text-[3vw]
+            class="w-[95vw] h-[97vh] p-[2.2svh] text-[3vw] mt-[10vw]
             sm:w-[68.75vw] sm:h-[35vw] sm:p-[2.2vw] sm:text-[1.125vw] sm:border-[0.2vw] sm:border-solid"
         >
             <Nav path={title} />
