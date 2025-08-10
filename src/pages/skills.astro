@@ -5,33 +5,35 @@ import TerminalBorder from "@components/TerminalBorder.astro";
 
 const max = 100;
 const data = [
-    { name: "Gamedev", weight: 80 },
-    { name: "Backend", weight: 50 },
-    { name: "Low-Level", weight: 70 },
-    { name: "Tooling", weight: 99 },
+    { name: "Tooling", weight: 75 },
+    { name: "Backend", weight: 80 },
+    { name: "Gamedev", weight: 99 },
+    { name: "Low-Level", weight: 95 },
     { name: "Frontend", weight: 15 },
 ];
 
-const langs = ["Java", "C/C++", "Golang", "Kotlin", "Rust", "Lua"];
+const langs = [
+    "C/C++", "Golang", "Java", "SQL", "Python",
+    "Zig", "Rust", "Kotlin", "C#" ,"Lua"
+];
 const tools = [
     "Git & GitHub",
-    "Sqlite3",
-    "Neovim and IntelliJ",
-    "Linux",
-    "NixOS",
+    "SQLite and Firebase",
+    "Linux & NixOS",
+    "Neovim and Tmux",
 ];
-const frameworks = ["Spigot API", "Bubbletea", "Astro"];
+const frameworks = ["Raylib", "Spigot API", "Bubbletea", "Astro"];
 ---
 
 <Terminal path="/home/kyren/skills.md">
     <div class="sm:flex overflow-y-auto h-[80svh]">
         <div class="sm:w-[60%] mt-[1vw] mx-[1vw] flex-column items-center">
             <TerminalBorder header="Languages">
-                <div class="grid grid-cols-3 items-center gap-x-[5vw] sm:gap-x-[0.625vw]">
+                <div class="grid grid-cols-5 items-center gap-x-[5vw] sm:gap-x-[0.625vw]">
                     {langs.map((lang) => <p>{lang}</p>)}
                 </div>
             </TerminalBorder>
-            <TerminalBorder header="Frameworks" extra="my-[5vw] sm:my-[2.25vw]">
+            <TerminalBorder header="Frameworks & Libraries" extra="my-[5vw] sm:my-[2.25vw]">
                 <div class="grid grid-cols-3 sm:grid-cols-1 items-center gap-x-[5vw] sm:gap-x-[0.625vw]">
                     {frameworks.map((framework) => <p>{framework}</p>)}
                 </div>
