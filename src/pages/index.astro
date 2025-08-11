@@ -31,6 +31,8 @@ I am also a terminal nerd and Linux enthusiast who uses NVIM btw.
 And when I am not coding I am most likely playing video games,
 watching Anime or solving Rubik's cubes fast.`.trimStart();
 
+const utcOffset = 3;
+
 ---
 
 <Terminal path="/home/kyren/">
@@ -80,16 +82,10 @@ watching Anime or solving Rubik's cubes fast.`.trimStart();
             </TerminalBorder>
             <TerminalBorder header="Timezone">
                 <div class="flex justify-between w-full">
-                    <span class="text-left">UTC+2</span>
+                    <span class="text-left">UTC+{utcOffset}</span>
                     <span id="time" class="text-right">Loading...</span>
                 </div>
             </TerminalBorder>
-            <!-- <TerminalBorder header="Timezone"> -->
-            <!--     <div class="flex justify-between w-full"> -->
-            <!--         <span class="text-left">UTC+2</span> -->
-            <!--         <span id="time" class="text-right">Loading...</span> -->
-            <!--     </div> -->
-            <!-- </TerminalBorder> -->
             <div class="w-[334%]">
                 <TerminalBorder header="SSH Key">
                     <div class="sshKeyCopy w-[100%] flex items-center group">
@@ -192,7 +188,7 @@ watching Anime or solving Rubik's cubes fast.`.trimStart();
             </TerminalBorder>
             <TerminalBorder header="Timezone">
                 <div class="flex justify-between w-full">
-                    <span class="text-left">UTC+2</span>
+                    <span class="text-left">UTC+{utcOffset}</span>
                     <span id="time" class="text-right">Loading...</span>
                 </div>
             </TerminalBorder>
@@ -209,8 +205,8 @@ watching Anime or solving Rubik's cubes fast.`.trimStart();
     </div>
 </Terminal>
 
-<script>
-    function copyToClipboard(text: string) {
+<script define:vars={{ utcOffset }}>
+    function copyToClipboard(text) {
         return function () {
             console.log("Clicked");
             navigator.clipboard
@@ -226,18 +222,17 @@ watching Anime or solving Rubik's cubes fast.`.trimStart();
         };
     }
 
-    const sshKey = document.getElementById("sshKey")!;
+    const sshKey = document.getElementById("sshKey");
     document.querySelectorAll(".sshKeyCopy").forEach((elem) => {
         elem.addEventListener("click", copyToClipboard(sshKey.innerHTML));
     });
 
-    const email = document.getElementById("email")!;
+    const email = document.getElementById("email");
     document.querySelectorAll(".emailCopy").forEach((elem) => {
         elem.addEventListener("click", copyToClipboard(email.innerHTML));
     });
 
-    const utcOffset = 2;
-    const time = document.getElementById("time")!;
+    const time = document.getElementById("time");
     setInterval(
         () => {
             const now = new Date();
