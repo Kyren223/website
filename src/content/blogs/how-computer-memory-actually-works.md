@@ -177,6 +177,9 @@ scattered and fragmented anyways.
 
 As always if you have questions or want to chat, feel free to contact me on discord at Kyren223 or email me at contact@kyren.codes.
 
+And if this kind of stuff interests you, I recommend checking out [my curated list of resources](https://git.kyren.codes/Kyren223/resources)
+for further reading about these topics.
+
 [^1]:
     CPUs have 2 registers usually called sp (stack pointer) and bp (base pointer) for
     storing the lower and upper bounds of the currently active stack.
