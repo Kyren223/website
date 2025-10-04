@@ -49,7 +49,7 @@ this means the virtual address space is 256TB in size.
 Of course, most computers don't have 256TB of physical memory[^2], for example, I only have 64GB.
 
 The reason this works is **virtual memory may not have physical memory backing it**, and keeping
-track of virtual memory is essentially free.
+track of virtual memory is essentially free[^3].
 You are not storing 256TB of data, you only need to keep track of ranges of virtual addresses and
 their mapping to the physical addresses that back them up.
 
@@ -116,8 +116,8 @@ differentiate memory into "the stack" and "the heap"?
 
 ### The stack
 
-The stack is a region where functions[^3] store their local variables, but it's just
-memory, the compiler specifies the wanted stack size in the executable format (usually 2MB),
+The stack is a region where functions[^4] store their local variables, but it's just
+memory, the compiler specifies the wanted stack size in the executable format (usually 1MB on windows and 8MB on linux),
 and the OS reserves it in the virtual address space when it creates the process.
 
 The heap on the other hand, is a higher-level interface that operating systems usually provide.  
@@ -188,5 +188,11 @@ for further reading about these topics.
 [^2]: Some super computers exceeded the 256TB limit, so certain CPUs support 52-bit or 56-bit addresses
 
 [^3]:
+    Misses in the translation lookaside buffer (a cache on the CPU for translating between virtual and physical memory)
+    can sometimes become a performance bottleneck (Thanks Martins Mozeiko for pointing this out!).
+    This is due to the need of storing an entry for every 4kb page, this can be mitigated by using
+    "large pages", which are usually 2MB in size instead of 4kb.
+
+[^4]:
     Procedures is the more correct term, function implies "pure function" with no side effects (like in math),
     while procedures may or may not have side effects.
