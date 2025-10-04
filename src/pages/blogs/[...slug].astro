@@ -24,7 +24,7 @@ const nextBlog = sortedBlogs[currentIndex - 1] || undefined;
 ---
 
 <Terminal path="/home/kyren/blogs/">
-    <div class="w-full h-[85svh] sm:h-[30vw] overflow-y-auto pr-[1.25vw] border-box">
+    <div class="blog-scroll w-full h-[85svh] sm:h-[30vw] overflow-y-auto pr-[1.25vw] border-box">
         <div class="text-[130%] h-full">
             <div class="text-[110%]">
                 <BlogItem
@@ -114,3 +114,19 @@ const nextBlog = sortedBlogs[currentIndex - 1] || undefined;
         margin-bottom: 1em;
     }
 </style>
+
+<script>
+  document.addEventListener('wheel', (e) => {
+    const box = document.querySelector('.blog-scroll');
+    if (!box) return;
+
+    // If scrolling the page itself, forward it to the box
+    const atTop = box.scrollTop === 0 && e.deltaY < 0;
+    const atBottom = box.scrollHeight - box.scrollTop === box.clientHeight && e.deltaY > 0;
+
+    if (!atTop && !atBottom) {
+      box.scrollTop += e.deltaY;
+      e.preventDefault();
+    }
+  }, { passive: false });
+</script>
