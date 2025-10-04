@@ -191,7 +191,7 @@ for further reading about these topics.
     Misses in the translation lookaside buffer (a cache on the CPU for translating between virtual and physical memory)
     can sometimes become a performance bottleneck (Thanks Martins Mozeiko for pointing this out!).
     This is due to the need of storing an entry for every 4kb page, this can be mitigated by using
-    "large pages", which are usually 2MB in size instead of 4kb.
+    "large pages", which are usually 2MB in size, substantially reducing the amount of needed page entries.
 
 [^4]:
     Procedures is the more correct term, function implies "pure function" with no side effects (like in math),
