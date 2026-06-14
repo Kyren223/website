@@ -175,7 +175,7 @@ scattered and fragmented anyways.
 
 ## End
 
-As always if you have questions or want to chat, feel free to contact me on discord at Kyren223 or email me at contact@kyren.codes.
+As always if you have questions or want to chat, feel free to contact me on discord at Kyren223 or email me at `contact at kyren.codes`.
 
 And if this kind of stuff interests you, I recommend checking out [my curated list of resources](https://git.kyren.codes/Kyren223/resources)
 for further reading about these topics.
